@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.just.resource_management_system.mapper.UserMapper">
+    <update id="UpdateUserInfo">
+        UPDATE wx_user
+        SET user_name = #{user.userName}, user_password = #{user.userPassword}, email = #{user.email}, phone_number = #{user.phoneNum}
+        WHERE id = #{user.id};
+    </update>
+    <select id="selectAll" resultType="edu.just.resource_management_system.pojo.User">
+        SELECT * FROM wx_user;
+    </select>
+    <select id="selectUserById" resultType="edu.just.resource_management_system.pojo.User">
+        SELECT * FROM wx_user WHERE id = #{id};
+    </select>
+    <select id="login" resultType="edu.just.resource_management_system.pojo.User">
+        SELECT * FROM wx_user WHERE user_name = #{username} AND user_password = #{password};
+    </select>
+    <insert id="register">
+        INSERT INTO wx_user (user_name, user_password, email, phone_number)
+        VALUES (#{userName}, #{userPassword}, #{email}, #{phoneNum});
+    </insert>
+
+</mapper>

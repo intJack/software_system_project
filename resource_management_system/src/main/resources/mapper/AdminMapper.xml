@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.just.resource_management_system.mapper.AdminMapper">
+    <insert id="attachAdmin">
+        INSERT INTO root_admin(admin_name, admin_password) VALUES (#{adminName}, #{adminPassword});
+    </insert>
+    <update id="ModifyAdminInfo">
+        UPDATE root_admin
+        SET admin_name = #{admin.adminName}, admin_password = #{admin.adminPassword}
+        WHERE id = #{admin.id};
+    </update>
+    <select id="login" resultType="edu.just.resource_management_system.pojo.Admin">
+        SELECT * FROM root_admin WHERE admin_name =#{adminName} AND admin_password =#{adminPassword};
+    </select>
+    <select id="selectAdminById" resultType="edu.just.resource_management_system.pojo.Admin">
+        SELECT * FROM root_admin WHERE id = #{id};
+    </select>
+
+</mapper>
