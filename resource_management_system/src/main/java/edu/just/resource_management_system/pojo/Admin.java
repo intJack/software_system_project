@@ -11,16 +11,13 @@ import org.springframework.stereotype.Repository;
 @AllArgsConstructor
 public class Admin {
     private Long id;
+    @Setter
     private String adminName;
     private String adminPassword;
 
     public Admin(String adminName, String adminPassword) {
         this.adminName = adminName;
         this.adminPassword = MD5Util.encryptToMD5(adminPassword);
-    }
-
-    public void setAdminName(String adminName) {
-        this.adminName = adminName;
     }
 
     public void setAdminPassword(String adminPassword) {

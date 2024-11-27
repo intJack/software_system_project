@@ -14,7 +14,9 @@ public class User {
     private String userName;
     //password是用户的 加密密文
     private String userPassword;
+    @Setter
     private String email;
+    @Setter
     private String phoneNumber;
 
     public User(String userName, String userPassword, String email, String phoneNumber) {
@@ -29,11 +31,4 @@ public class User {
         this.userPassword = MD5Util.encryptToMD5(userPassword);
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 }
