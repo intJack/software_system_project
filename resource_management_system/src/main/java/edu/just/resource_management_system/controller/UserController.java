@@ -18,8 +18,8 @@ public class UserController {
 
     @PostMapping("/SignIn")
     public String SignIn(User user){
-        //对密码进行MD5算法加密
-        user.setUserPassword(MD5Util.encryptToMD5(user.getUserPassword()));
+        //已经在setUserPassword方法对密码进行了加密
+//        user.setUserPassword(MD5Util.encryptToMD5(user.getUserPassword()));
         //存入数据库
         userService.saveUser(user);
         //返回首页
@@ -28,7 +28,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<HttpRequest> Login(@RequestParam("userName")String userName,
-                                             @RequestParam("password")String password){
+                                             @RequestParam("userPassword")String password){
         User user = userService.login(userName, MD5Util.encryptToMD5(password));
         if (user != null) {
             String token = TokenUtil.token(userName, password);

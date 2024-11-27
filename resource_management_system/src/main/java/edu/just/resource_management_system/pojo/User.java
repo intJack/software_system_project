@@ -1,12 +1,12 @@
 package edu.just.resource_management_system.pojo;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import edu.just.resource_management_system.util.MD5Util;
+import lombok.*;
 import org.springframework.stereotype.Repository;
 
 @Repository
-@Data
+@ToString
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
@@ -20,8 +20,20 @@ public class User {
     public User(String userName, String userPassword, String email, String phoneNumber) {
         this.userName = userName;
         //需要进行加密
-        this.userPassword = userPassword;
+        this.userPassword = MD5Util.encryptToMD5(userPassword);
         this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = MD5Util.encryptToMD5(userPassword);
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }
