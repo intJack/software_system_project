@@ -5,6 +5,11 @@
     <select id="selectAllLanguages" resultType="edu.just.resource_management_system.pojo.Language">
         select * from language;
     </select>
+    <select id="selectIdsByLanguages" resultType="java.lang.Long">
+        select tl.id FROM tag_language tl,language l
+                     where tl.language_name=l.language_name and l.language_name=#{language}
+    </select>
+
 
 </mapper>
 

@@ -10,5 +10,12 @@ public interface TagMapper {
      */
     List<Tag> selectAllTags();
 
+    /**
+     * 和查询language一样
+     * 第一步要在 tag_language找到大量ids
+     * @param tagName
+     * @return
+     */
+    List<Long> selectIdsByTags(String tagName);
 
 }
