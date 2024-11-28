@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>资源查询结果</title>
+</head>
+<body>
+<h2>资源查询结果</h2>
+<ul>
+    <!-- 动态生成查询结果 -->
+    <c:forEach var="resource" items="${resources}">
+        <li>
+            <a href="/resources/details/${resource.id}">
+                ${resource.title}
+            </a>
+            <p>${resource.description}</p>
+        </li>
+    </c:forEach>
+</ul>
+</body>
+</html>>

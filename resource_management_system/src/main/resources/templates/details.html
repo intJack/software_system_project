@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>资源详情</title>
+</head>
+<body>
+<h2>${resource.title}</h2>
+<p>描述：${resource.description}</p>
+<p>开发语言：${resource.language}</p>
+<p>标签：
+    <c:forEach var="tag" items="${resource.tags}">
+        ${tag.name}
+    </c:forEach>
+</p>
+<a href="/resources/download/${resource.id}"
+   onclick="return checkLogin()">下载资源</a>
+<script>
+    function checkLogin() {
+        if (!localStorage.getItem("token")) {
+            alert("请先登录！");
+            window.location.href = "/user/login";
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>
