@@ -12,5 +12,9 @@
         </foreach>
         LIMIT 10
     </select>
+    <select id="selectByKeyWord" resultType="edu.just.resource_management_system.pojo.Resource">
+        SELECT resource_title,resource_url FROM resource
+        WHERE resource_title LIKE CONCAT('%', #{keyWord}, '%');
+    </select>
 </mapper>
 

@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class TokenUtil {
     // 设置失效时间
-    private static final long EXPIRE_DATE = 30 * 60 * 1000; // 30 minutes
+    private static final long EXPIRE_DATE = 60 * 60 * 1000; // 60 minutes
     // Token密钥
     private static final String TOKEN_SECRET = "ZCfasfhuaUUHufguGuwu2020BQWE";
 
@@ -52,13 +52,31 @@ public class TokenUtil {
             return false;
         }
     }
+    /*
+    判断token是否过期了.
+    true --没过期
+    false --过期了 重新登录
+     */
+    public static boolean IsNotExpire(String token){
+        //得到令牌失效的时间
+        long expires = JWT.decode(token).getExpiresAt().getTime();
+        return expires >= System.currentTimeMillis()?true:false;
+    }
+
+    public static boolean validateToken(String token){
+        return (verify(token) && IsNotExpire(token));
+    }
 
     public static void main(String[] args) {
-        String username = "zhangsan";
+        String username = "zhansan";
         String password = "123";
         String token = token(username, password);
-        System.out.println(token);
-        boolean isValid = verify(token);
-        System.out.println(isValid);
+        System.out.println(validateToken(token));
+//        String token2 = token("zhansan",password)+'a';
+//        System.out.println(verify(token2));
+//        System.out.println(IsNotExpire(token));
+//        System.out.println(token);
+//        boolean isValid = verify(token);
+//        System.out.println(isValid);
     }
 }

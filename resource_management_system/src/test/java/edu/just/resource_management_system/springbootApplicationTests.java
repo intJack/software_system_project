@@ -64,6 +64,10 @@ class springbootApplicationTests {
     @Autowired
     ResourceMapper resourceMapper;
     @Test
+    void TestResourceMapper(){
+        resourceMapper.selectByKeyWord("C").stream().forEach(System.out::println);
+    }
+    @Test
     void testLanguageMapper(){
         resourceMapper.selectTop10Resources(languageMapper.selectIdsByLanguages("Chinese")).forEach(System.out::println);
 //        languageMapper.selectAllLanguages().forEach(System.out::println);

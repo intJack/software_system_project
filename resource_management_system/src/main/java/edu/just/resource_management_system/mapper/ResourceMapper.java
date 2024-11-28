@@ -13,9 +13,15 @@ public interface ResourceMapper {
     /**
      * 无论是单独查询语言 还是标签 最后都需要执行这一条 SQL语句
      * @param tagLanguageIds
-     * @return
+     * @return 资源的URL 和 title
      */
     List<Resource> selectTop10Resources(List<Long>tagLanguageIds);
 
+    /**
+     * 关键字查询资源
+     * @param keyWord 关键字
+     * @return 资源的URL 和 title
+     */
+    List<Resource> selectByKeyWord(String keyWord);
 
 }
