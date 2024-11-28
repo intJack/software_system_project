@@ -2,7 +2,6 @@ package edu.just.resource_management_system;
 
 import edu.just.resource_management_system.mapper.CarouselMapper;
 import edu.just.resource_management_system.mapper.LanguageMapper;
-import edu.just.resource_management_system.mapper.ResourceMapper;
 import edu.just.resource_management_system.mapper.TagMapper;
 import edu.just.resource_management_system.pojo.Admin;
 import edu.just.resource_management_system.pojo.User;
@@ -13,8 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
 
 @MapperScan(basePackages = "edu.just.resource_management_system.mapper")
 @SpringBootTest
@@ -61,21 +58,16 @@ class springbootApplicationTests {
     }
     @Autowired
     LanguageMapper languageMapper;
-    @Autowired
-    ResourceMapper resourceMapper;
     @Test
     void testLanguageMapper(){
-        resourceMapper.selectTop10Resources(languageMapper.selectIdsByLanguages("Chinese")).forEach(System.out::println);
-//        languageMapper.selectAllLanguages().forEach(System.out::println);
+        languageMapper.selectAllLanguages().forEach(System.out::println);
     }
     @Autowired
     TagMapper tagMapper;
     @Test
     void testTagMapper(){
-        List<Long> ids = tagMapper.selectIdsByTags("Java");
-        resourceMapper.selectTop10Resources(ids).stream().forEach(System.out::println);
+        tagMapper.selectAllTags().forEach(System.out::println);
     }
-
 
 
 }
