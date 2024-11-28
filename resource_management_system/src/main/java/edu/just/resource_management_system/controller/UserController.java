@@ -25,20 +25,34 @@ public class UserController {
         //存入数据库
         userService.saveUser(user);
         //返回首页
-        return "login";
+        return "home";
     }
 
+    /**
+     * 用户登录
+     * @param userName 用户名
+     * @param password 密码
+     * @param model 用于传递信息给视图
+     * @return 跳转到主页或者显示错误信息
+     */
     @PostMapping("/login")
-    public ResponseEntity<HttpRequest> Login(@RequestParam("userName")String userName,
-                                             @RequestParam("userPassword")String password){
-        User user = userService.login(userName, MD5Util.encryptToMD5(password));
+    public String login(@RequestParam("userName") String userName,
+                        @RequestParam("userPassword") String password, Model model) {
+
+        // 加密密码
+        String encryptedPassword = MD5Util.encryptToMD5(password);
+
+        // 调用服务进行登录验证
+        User user = userService.login(userName, encryptedPassword);
+
         if (user != null) {
-            String token = TokenUtil.token(userName, password);
-            // 在请求头添加token
-            return ResponseEntity.ok().header("Authorization", token).build();
+            // 登录成功，跳转到主页
+            model.addAttribute("user", user);  // 可以把用户信息添加到 Model 里
+            return "home";  // 返回主页视图名
         } else {
-            // 401 代表 授权失败
-            return ResponseEntity.status(401).build();
+            // 登录失败，返回登录页面并显示错误信息
+            model.addAttribute("error", "用户名或密码错误");
+            return "login";  // 还停留在登录页面
         }
     }
 

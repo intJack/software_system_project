@@ -7,5 +7,8 @@
     <select id="selectAllTags" resultType="edu.just.resource_management_system.pojo.Tag">
         SELECT * FROM tag;
     </select>
+    <select id="selectIdsByTags" resultType="java.lang.Long">
+        SELECT id FROM tag_language as tl,tag as t WHERE tl.tag_name=t.tag_name and t.tag_name=#{tagName};
+    </select>
 </mapper>
 

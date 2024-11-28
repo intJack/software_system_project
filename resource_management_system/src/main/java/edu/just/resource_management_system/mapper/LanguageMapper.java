@@ -10,4 +10,11 @@ public interface LanguageMapper {
      */
     List<Language> selectAllLanguages();
 
+    /**
+     * 根据语言查询的第一步：从tag_language库找到某个语言下的ids
+     * 在ResourceMapper 实现根据ids来找到资源
+     * @param language
+     * @return
+     */
+    List<Long> selectIdsByLanguages(String language);
 }

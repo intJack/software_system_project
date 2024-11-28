@@ -73,7 +73,7 @@ CREATE TABLE resource(
                          updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,  -- 更新时间
                          FOREIGN KEY (tag_language_id) REFERENCES tag_language(id) ON DELETE CASCADE
 );
-INSERT INTO resource(tag_language_id, resource_title, resource_url, resource_description) VALUES(1, 'java基础', 'https://www.java.com', 'java基础学习资源');
+
 
 CREATE TABLE resource_description(
                                      id INT AUTO_INCREMENT PRIMARY KEY,
