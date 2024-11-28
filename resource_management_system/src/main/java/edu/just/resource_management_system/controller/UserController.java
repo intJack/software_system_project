@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -38,5 +40,16 @@ public class UserController {
             // 401 代表 授权失败
             return ResponseEntity.status(401).build();
         }
+    }
+
+    /**
+     * 用户实现对语言的查询 点击语言相关的资源 然后跳转到查询结果页
+     * @return
+     */
+    @RequestMapping("/search/{language}")
+    public String searchLanguage(Model model){
+
+        //跳转到查询结果页
+        return "";
     }
 }
