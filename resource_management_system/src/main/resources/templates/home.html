@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet"  href="/css/style.css" type="text/css">
+
     <title>资源管理系统 - 首页</title>
 </head>
 <body>
@@ -21,14 +22,22 @@
             <a href="/register">注册</a>
         </li>
         <li class="nav-item">
-            <a href="/index">登录</a>
+            <a href="/login">登录</a>
         </li>
         <li class="nav-item">
             <a href="/search">资源查询</a>
         </li>
         <li class="nav-item">
-            <a href="/language-query">语言查询</a>
+            <a href="javascript:void(0);">语言查询</a>
+            <ul class="nav-content">
+                <li><a href="/language-query/java">Java</a></li>
+                <li><a href="/language-query/python">Python</a></li>
+                <li><a href="/language-query/javascript">JavaScript</a></li>
+                <li><a href="/language-query/csharp">C#</a></li>
+                <li><a href="/language-query/php">PHP</a></li>
+            </ul>
         </li>
+
     </ul>
 </header>
 
@@ -66,18 +75,7 @@
     </ul>
 </section>
 
-<!-- Language Query -->
-<section class="language-query">
-    <h2>按语言查询</h2>
-    <ul class="language-list">
-        <!-- Dynamically populate these items with server data -->
-        <li><a href="/language/java">Java</a></li>
-        <li><a href="/language/python">Python</a></li>
-        <li><a href="/language/javascript">JavaScript</a></li>
-        <li><a href="/language/csharp">C#</a></li>
-        <li><a href="/language/php">PHP</a></li>
-    </ul>
-</section>
+
 
 <!-- Footer -->
 <footer class="footer">

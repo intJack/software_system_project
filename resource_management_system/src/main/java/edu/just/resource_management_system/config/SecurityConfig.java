@@ -27,13 +27,13 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/home", "/login", "/index","/register").permitAll()  // Allow login and register without authentication
+                                .requestMatchers("/home", "/css/**","/search","/login", "/index","/register").permitAll()  // Allow login and register without authentication
                                 .anyRequest().authenticated()  // All other requests require authentication
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")  // Specify the login page
+                        .loginPage("/home")  // Specify the login page
                         .permitAll()  // Allow everyone to access the login page
-                        .defaultSuccessUrl("/home", true)  // Redirect to home page after successful login
+                        .defaultSuccessUrl("/index", true)  // Redirect to home page after successful login
                         .failureUrl("/login?error=true")  // Redirect on login failure
                 )
                 .logout(logout -> logout

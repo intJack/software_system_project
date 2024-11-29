@@ -35,7 +35,7 @@ public class UserController {
      * @param model 用于传递信息给视图
      * @return 跳转到主页或者显示错误信息
      */
-    @PostMapping("/login")
+    @PostMapping("/login1")
     public String login(@RequestParam("userName") String userName,
                         @RequestParam("userPassword") String password, Model model) {
 

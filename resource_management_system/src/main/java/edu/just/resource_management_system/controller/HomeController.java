@@ -18,11 +18,19 @@ public class HomeController {
     // Mapping for the home page
     @GetMapping("/home")
     public String homePage() {
-        return "home";  // Your home page view (make sure you have home.html or equivalent)
+        return "home";  // Your home page view
     }
 
     @GetMapping("/login")
     public String loginPage() {
-        return "index";  // This will render login.html
+        return "index";  //
+    }
+    @GetMapping("/register")
+    public String registerPage() {
+        return "register";
+    }
+    @GetMapping("/search")
+    public String searchPage() {
+        return "search";
     }
 }

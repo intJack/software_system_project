@@ -220,6 +220,75 @@ header ul li img {
     margin-top: 20px;
 }
 
+/* 隐藏子菜单 */
+.nav-content {
+    display: none;
+    position: absolute;
+    top: 100%; /* 紧贴主菜单下方 */
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8); /* 背景色 */
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    z-index: 1000;
+    border-radius: 4px; /* 圆角 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+}
+
+/* 子菜单项样式 */
+.nav-content li {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-content li a {
+    display: block;
+    padding: 10px 15px;
+    color: var(--greyLight); /* 文字颜色 */
+    text-decoration: none;
+    white-space: nowrap; /* 禁止换行 */
+}
+
+.nav-content li a:hover {
+    background-color: var(--blue); /* 悬停背景色 */
+    color: var(--white); /* 悬停文字颜色 */
+}
+
+/* 鼠标悬停时显示子菜单 */
+.nav-item:hover .nav-content {
+    display: block;
+}
+.carousel__item {
+    background-size: cover;
+    background-position: center;
+    height: 400px; /* 固定高度 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    text-align: center;
+}
+.resource-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.resource-list li {
+    margin: 10px 0;
+}
+
+.resource-list li a {
+    color: var(--blue);
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.resource-list li a:hover {
+    color: var(--a);
+}
+
+
 .background {
     position: absolute;
     bottom: 0;
