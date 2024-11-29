@@ -3,19 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <title>资源查询结果</title>
+    <style>
+        /* 通用样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* 页面容器 */
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 标题 */
+        .resource-title {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* 查询结果列表 */
+        .resource-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .resource-list li {
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-list li a {
+            font-size: 18px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .resource-list li a:hover {
+            text-decoration: underline;
+        }
+
+        .resource-list li p {
+            color: #555;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-<h2>资源查询结果</h2>
-<ul>
-    <!-- 动态生成查询结果 -->
-    <c:forEach var="resource" items="${resources}">
-        <li>
-            <a href="/resources/details/${resource.id}">
-                ${resource.title}
-            </a>
-            <p>${resource.description}</p>
-        </li>
-    </c:forEach>
-</ul>
+
+<div class="container">
+    <h2 class="resource-title">资源查询结果</h2>
+    <ul class="resource-list">
+        <!-- 动态生成查询结果 -->
+        <c:forEach var="resource" items="${resources}">
+            <li>
+                <a href="/resources/details/${resource.id}">${resource.title}</a>
+                <p>${resource.description}</p>
+            </li>
+        </c:forEach>
+    </ul>
+</div>
+
 </body>
-</html>>
+</html>
