@@ -1,25 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>资源详情</title>
+    <style>
+        /* 通用样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* 页面容器 */
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 标题 */
+        .resource-title {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* 资源信息部分 */
+        .resource-info {
+            margin-bottom: 20px;
+        }
+
+        .resource-info p {
+            font-size: 16px;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .resource-info strong {
+            color: #333;
+        }
+
+        /* 标签样式 */
+        .tag {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 5px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+
+        /* 按钮部分 */
+        .button-group {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            transition: background-color 0.3s;
+        }
+
+        /* 下载按钮 */
+        .btn-download {
+            background-color: #28a745;
+        }
+
+        .btn-download:hover {
+            background-color: #218838;
+        }
+
+        .btn-download:active {
+            background-color: #1e7e34;
+        }
+
+        /* 首页按钮 */
+        .btn-home {
+            background-color: #007bff;
+        }
+
+        .btn-home:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-home:active {
+            background-color: #004085;
+        }
+    </style>
 </head>
 <body>
-<h2>${resource.title}</h2>
-<p>描述：${resource.description}</p>
-<p>开发语言：${resource.language}</p>
-<p>标签：
-    <c:forEach var="tag" items="${resource.tags}">
-        ${tag.name}
-    </c:forEach>
-</p>
-<a href="/resources/download/${resource.id}"
-   onclick="return checkLogin()">下载资源</a>
+<div class="container">
+    <h2 class="resource-title">${resource.title}</h2>
+    <div class="resource-info">
+        <p><strong>描述：</strong>${resource.description}</p>
+        <p><strong>开发语言：</strong>${resource.language}</p>
+        <p><strong>标签：</strong>
+            <c:foreach var="tag" items="${resource.tags}">
+                <span class="tag">${tag.name}</span>
+            </c:foreach>
+        </p>
+    </div>
+    <div class="button-group">
+        <!-- 下载资源按钮 -->
+        <a href="http://localhost:63342/resources/download/${resource.id}" onclick="return checkLogin()" class="btn btn-download">下载资源</a>
+        <!-- 首页按钮 -->
+        <a href="home.html" class="btn btn-home">首页</a>
+    </div>
+</div>
+
 <script>
     function checkLogin() {
         if (!localStorage.getItem("token")) {
             alert("请先登录！");
-            window.location.href = "/user/login";
+            window.location.href = "index.html";
             return false;
         }
         return true;

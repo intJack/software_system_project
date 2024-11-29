@@ -21,6 +21,10 @@ public class HomeController {
         return "home";  // Your home page view
     }
 
+
+
+
+
     @GetMapping("/login")
     public String loginPage() {
         return "index";  //
@@ -29,6 +33,11 @@ public class HomeController {
     public String registerPage() {
         return "register";
     }
+
+
+
+
+
     @GetMapping("/search")
     public String searchPage() {
         return "search";
