@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" xmlns:th="http://www.tymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,26 +12,15 @@
 <body>
 <header>
     <ul id="header">
-        <li class="nav-item">
-            <a href="#"><img src="" alt="logo" /></a>
-            <div class="nav-content">
-                <p>资源管理系统</p>
-            </div>
+        <li class="nav-item" >
+            <a href="#"><img src="/images/logo.jpg" alt="logo" style="width: 80px; height: auto;"/></a>
         </li>
-        <li class="nav-item">
-            <a href="/register">注册</a>
-        </li>
-
-
-
+<!--        <li class="nav-item">-->
+<!--            <a href="/register">注册</a>-->
+<!--        </li>-->
         <li class="nav-item">
             <a href="/login">登录</a>
         </li>
-
-
-
-
-
         <li class="nav-item">
             <a href="/search">资源查询</a>
         </li>
