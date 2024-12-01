@@ -9,34 +9,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-    // Redirect from root URL to /home
     @GetMapping("/")
     public String redirectToHome() {
-        return "redirect:/home";  // Redirect to /home
+        return "redirect:/home";
     }
 
     // Mapping for the home page
     @GetMapping("/home")
     public String homePage() {
-        return "home";  // Your home page view
+        return "home";
     }
-
-
-
-
 
     @GetMapping("/login")
     public String loginPage() {
-        return "index";  //
+        return "index";
     }
+
     @GetMapping("/register")
     public String registerPage() {
         return "register";
     }
-
-
-
-
 
     @GetMapping("/search")
     public String searchPage() {

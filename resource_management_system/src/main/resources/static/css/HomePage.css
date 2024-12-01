@@ -1,0 +1,156 @@
+/* 通用样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+/* 顶部导航栏 */
+header {
+    background-color: #3399FF;
+    color: white;
+    padding: 10px 0;
+}
+
+.navbar {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .logo a {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar nav ul {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar nav a {
+    color: white;
+    font-size: 16px;
+}
+
+/* 主体内容 */
+main {
+    width: 80%;
+    margin: 20px auto;
+    display: flex;
+    gap: 20px;
+}
+
+.main-content {
+    width: 70%;
+}
+
+.post {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.post h2 a {
+    color: #333;
+    font-size: 20px;
+}
+
+.post .excerpt {
+    font-size: 14px;
+    color: #666;
+}
+
+.read-more {
+    font-size: 14px;
+    color: #3399FF;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.load-more {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.load-more a {
+    font-size: 16px;
+    color: #3399FF;
+}
+
+/* 统一容器宽度 */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+}
+
+/* 右侧侧边栏 */
+.sidebar {
+    width: 25%; /* 设置与其他元素相同的宽度 */
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd; /* 添加边框，确保与其他元素一致 */
+    box-sizing: border-box; /* 包括padding和border在内的总宽度 */
+}
+
+.sidebar h3 {
+    margin-bottom: 10px;
+}
+
+/* 使用 flexbox 让列表横向排列 */
+.sidebar ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.sidebar ul li {
+    list-style: none;
+}
+
+.sidebar a {
+    color: #3399FF;
+    font-size: 16px;
+}
+
+/* 可以设置资源查询或语言查询部分的样式，确保宽度一致 */
+.resource-query, .language-query {
+    width: 20%; /* 与sidebar宽度一致 */
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+/* 底部 */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
