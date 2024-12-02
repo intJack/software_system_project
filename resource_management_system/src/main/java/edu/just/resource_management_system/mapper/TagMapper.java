@@ -1,6 +1,8 @@
 package edu.just.resource_management_system.mapper;
 
 import edu.just.resource_management_system.pojo.Tag;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface TagMapper {
@@ -18,4 +20,6 @@ public interface TagMapper {
      */
     List<Long> selectIdsByTags(String tagName);
 
+    List<Long> selectIdByTagAndLanguage(@Param("tagName") String tagName,
+                                        @Param("languageName") String languageName);
 }

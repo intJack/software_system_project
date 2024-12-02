@@ -9,7 +9,16 @@
         select tl.id FROM tag_language tl,language l
                      where tl.language_name=l.language_name and l.language_name=#{language}
     </select>
-
-
+    <select id="selectIdByTagAndLanguage" resultType="java.lang.Long">
+        SELECT id FROM tag_language
+        <where>
+            <if test="tagName != '' and tagName != null">
+                tag_name = #{tagName}
+            </if>
+            <if test="languageName != '' and tagName != null">
+                and language_name = #{languageName}
+            </if>
+        </where>
+    </select>
 </mapper>
 
