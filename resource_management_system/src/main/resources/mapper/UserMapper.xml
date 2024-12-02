@@ -17,7 +17,7 @@
     </select>
     <insert id="register">
         INSERT INTO wx_user (user_name, user_password, email, phone_number)
-        VALUES (#{userName}, #{userPassword}, #{email}, #{phoneNum});
+        VALUES (#{userName}, #{userPassword}, #{email}, #{phoneNumber});
     </insert>
 
 </mapper>

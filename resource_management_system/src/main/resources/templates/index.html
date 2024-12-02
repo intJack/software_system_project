@@ -54,17 +54,17 @@
 </head>
 <body>
 <div class="container">
-    <h1>Login</h1>
+    <h1>登录界面</h1>
     <form action="#" th:action="@{/login1}" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required />
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required />
-        <button type="submit">Login</button>
+        <label for="userName">用户名:</label>
+        <input type="text" id="userName" name="userName" required />
+        <label for="userPassword">密码:</label>
+        <input type="password" id="userPassword" name="userPassword" required />
+        <button type="submit">登录</button>
+        <p th:text="${error}" style="color: red;"></p>
         <p>
-            Don't have an account?
-            <a th:href="@{/register}">Register here</a>
-
+            还没有账号？
+            <a th:href="@{/register}">点击这里 完成注册</a>
         </p>
     </form>
 </div>

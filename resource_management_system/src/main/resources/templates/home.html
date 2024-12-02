@@ -18,8 +18,9 @@
                 <li><a th:href="@{/}">首页</a></li>
                 <li><a href="#">论坛</a></li>
                 <li><a href="#">关于</a></li>
-                <li><a th:href="@{/login}">登录</a></li>
-                <li><a th:href="@{/register}">注册</a></li>
+                <li th:if="${user == null}"><a th:href="@{/login}">登录</a></li>
+                <li th:if="${user == null}"><a th:href="@{/register}">注册</a></li>
+                <li th:if="${user != null}"><a th:text="${user.userName}" href="#"></a></li>
             </ul>
         </nav>
     </div>

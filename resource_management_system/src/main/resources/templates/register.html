@@ -29,7 +29,7 @@
             margin-top: 10px;
             display: block; /* Each label occupies a line */
         }
-        input[type="text"], input[type="password"] {
+        input[type="text"], input[type="password"],input[type="email"],input[type="tel"] {
             width: 100%;
             padding: 10px;
             margin-top: 5px;
@@ -79,15 +79,18 @@
 </head>
 <body>
 <div class="container">
-    <h1>Register</h1>
-    <form action="/user/register" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required />
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required />
+    <h1>注册界面</h1>
+    <form action="/SignIn" method="post">
+        <label for="userName">用户名:</label>
+        <input type="text" id="userName" name="userName" required />
+        <label for="userPassword">密码:</label>
+        <input type="password" id="userPassword" name="userPassword" required />
+        <label for="email">邮箱:</label>
+        <input type="email" id="email" name="email" required />
+        <label for="phone">电话号码:</label>
+        <input type="tel" id="phone" name="phoneNumber" pattern="\d{11}" title="电话号码必须是11位数字" required />
         <button type="submit">注册</button>
     </form>
-
 </div>
 </body>
 </html>

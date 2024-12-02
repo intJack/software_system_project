@@ -20,9 +20,7 @@ public class UserController {
 
     @PostMapping("/SignIn")
     public String SignIn(User user){
-        //已经在setUserPassword方法对密码进行了加密
-//        user.setUserPassword(MD5Util.encryptToMD5(user.getUserPassword()));
-        //存入数据库
+        //添加新用户信息
         userService.saveUser(user);
         //返回首页
         return "home";
@@ -47,12 +45,15 @@ public class UserController {
 
         if (user != null) {
             // 登录成功，跳转到主页
-            model.addAttribute("user", user);  // 可以把用户信息添加到 Model 里
-            return "home";  // 返回主页视图名
+            // 可以把用户信息添加到 Model 里
+            model.addAttribute("user", user);
+            return "home";
         } else {
             // 登录失败，返回登录页面并显示错误信息
             model.addAttribute("error", "用户名或密码错误");
-            return "login";  // 还停留在登录页面
+            // 还停留在登录页面
+            model.addAttribute("error", "用户名或密码错误，请重新输入");
+            return "index";
         }
     }
 
