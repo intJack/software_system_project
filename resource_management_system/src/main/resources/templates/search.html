@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.tymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>资源查询</title>
@@ -87,13 +87,13 @@
     <label for="tag">标签：</label>
     <select id="tag" name="tagId">
       <option value="">请选择标签</option>
-      <!-- 后端动态生成标签 -->
+      <option th:each="tag : ${allTags}" th:text="${tag.tagName}"></option>
     </select>
 
     <label for="language">开发语言：</label>
     <select id="language" name="languageId">
       <option value="">请选择语言</option>
-      <!-- 后端动态生成语言选项 -->
+      <option th:each="language : ${allLanguages}" th:text="${language.languageName}"></option>
     </select>
 
     <button type="submit">搜索</button>

@@ -2,7 +2,11 @@ package edu.just.resource_management_system.controller;
 
 
 
+import edu.just.resource_management_system.service.LanguageService;
+import edu.just.resource_management_system.service.TagService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -30,8 +34,18 @@ public class HomeController {
         return "register";
     }
 
+    /**
+     * 跳转到search界面 往modelmap加入所有标签和语言
+     * @return search.html
+     */
+    @Autowired
+    TagService tagService;
+    @Autowired
+    LanguageService languageService;
     @GetMapping("/search")
-    public String searchPage() {
+    public String searchPage(ModelMap modelMap) {
+        modelMap.addAttribute("allTags",tagService.findAllTags());
+        modelMap.addAttribute("allLanguages",languageService.findAllLanguages());
         return "search";
     }
 }
