@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.tymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>资源详情</title>
@@ -106,9 +106,9 @@
         <p><strong>描述：</strong>${resource.description}</p>
         <p><strong>开发语言：</strong>${resource.language}</p>
         <p><strong>标签：</strong>
-            <c:foreach var="tag" items="${resource.tags}">
-                <span class="tag">${tag.name}</span>
-            </c:foreach>
+            <th:each var="tag" items="${resource.tags}">
+                <span class="tag" th:text="${tag.name}"></span>
+            </th:each>
         </p>
     </div>
     <div class="button-group">

@@ -5,12 +5,30 @@
 <mapper namespace="edu.just.resource_management_system.mapper.ResourceMapper">
 <!--查询前十条资源-->
     <select id="selectTop10Resources" resultType="edu.just.resource_management_system.pojo.Resource">
-        SELECT r.resource_title,r.resource_url FROM resource as r
-        WHERE r.tag_language_id in
-        <foreach collection="list" item="id" open="(" separator="," close=")">
-            #{id}
-        </foreach>
+        SELECT r.id,r.resource_title,r.resource_url FROM resource as r
+        <where>
+            <if test="ids != null and !ids.isEmpty()">
+                r.tag_language_id IN
+                <foreach collection="ids" item="id" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+        </where>
         LIMIT 10
+    </select>
+    <select id="selectResourcesByIdsAndKeyword" resultType="edu.just.resource_management_system.pojo.Resource">
+        SELECT r.id,r.resource_title,r.resource_url FROM resource as r
+        <where>
+            <if test="ids != null and !ids.isEmpty()">
+                r.tag_language_id in
+                <foreach collection="ids" item="id" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+            <if test="keyword != '' and keyword != null">
+                AND resource_title LIKE CONCAT('%',#{keyword},'%')
+            </if>
+        </where>
     </select>
 </mapper>
 

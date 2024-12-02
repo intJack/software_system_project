@@ -1,6 +1,8 @@
 package edu.just.resource_management_system.controller;
 
+import edu.just.resource_management_system.pojo.Resource;
 import edu.just.resource_management_system.pojo.User;
+import edu.just.resource_management_system.service.ResourceService;
 import edu.just.resource_management_system.service.UserService;
 import edu.just.resource_management_system.util.MD5Util;
 import edu.just.resource_management_system.util.TokenUtil;
@@ -9,14 +11,20 @@ import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private ResourceService resourceService;
 
     @PostMapping("/SignIn")
     public String SignIn(User user){
@@ -58,12 +66,28 @@ public class UserController {
     }
 
     /**
+     * @param keyword
+     * @param tagName
+     * @param languageName
+     * @param modelMap
+     * @return
+     */
+    @PostMapping("/search")
+    public String searchIdAndKeyword(@RequestParam("keyword")String keyword,
+                                     @RequestParam("tagName")String tagName,
+                                     @RequestParam("languageName")String languageName,
+                                     ModelMap modelMap){
+        List<Resource> resources = resourceService.findResourcesByIdsAndKeyword(tagName, languageName, keyword);
+        modelMap.addAttribute("resources",resources);
+        return "results";
+    }
+
+    /**
      * 用户实现对语言的查询 点击语言相关的资源 然后跳转到查询结果页
      * @return
      */
     @RequestMapping("/search/{language}")
     public String searchLanguage(Model model){
-
         //跳转到查询结果页
         return "";
     }

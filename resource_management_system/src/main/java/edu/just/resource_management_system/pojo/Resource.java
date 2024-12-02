@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Resource {
-
+    private Long id;
     private String resourceTitle;
     private String resourceUrl;
     private String resourceDescription;

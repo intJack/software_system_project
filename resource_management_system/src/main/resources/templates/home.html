@@ -31,27 +31,70 @@
     <div class="container">
         <!-- 左侧文章列表 -->
         <div class="main-content">
+            <!-- 轮播图 -->
+            <div class="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item"><img src="/image1.png" alt="Image 1"></div>
+                    <div class="carousel-item"><img src="/image2.png" alt="Image 2"></div>
+                    <div class="carousel-item"><img src="/image3.png" alt="Image 3"></div>
+                    <!-- 更多轮播图项目 -->
+                </div>
+                <div class="carousel-indicators">
+                    <div class="carousel-indicator active" data-index="0"></div>
+                    <div class="carousel-indicator" data-index="1"></div>
+                    <div class="carousel-indicator" data-index="2"></div>
+                    <!-- 更多指示器 -->
+                </div>
+            </div>
             <article class="post">
                 <h2><a th:href="@{/search}">资源查询</a></h2>
-                <a class="read-more" th:href="@{/search}">进行查询 &gt;</a>
+                <a class="read-more" th:href="@{/search}">进行查询&gt;</a>
             </article>
 
             <article class="post">
                 <h2><a th:href="@{/search}">语言查询</a></h2>
-                <a class="read-more" th:href="@{/search}">进行查询 &gt;</a>
+                <a class="read-more" th:href="@{/search}">进行查询&gt;</a>
             </article>
 
+
+<!--有问题-->
             <article class="post">
-                <h2><a href="#">最新帖子</a></h2>
-                <a class="read-more" href="#">查看详情 &gt;</a>
+                <h2><a th:href="@{/details}">最新帖子</a></h2>
+                <a class="read-more" th:href="@{/details}">查看详情&gt;</a>
             </article>
         </div>
     </div>
+
 </main>
 
 <!-- 底部 -->
 <footer>
     <p>&copy; 2024资源管理系统 - 保留所有权利</p>
 </footer>
+<script>
+    // 轮播图逻辑
+    let currentIndex = 0;
+    const slides = document.querySelectorAll('.carousel-item');
+    const indicators = document.querySelectorAll('.carousel-indicator');
+
+    const updateCarousel = (index) => {
+        slides.forEach((slide, i) => {
+            slide.style.transform = `translateX(${100 * (i - index)}%)`;
+        });
+        indicators.forEach((indicator, i) => {
+            indicator.classList.toggle('active', i === index);
+        });
+    };
+
+    indicators.forEach((indicator, i) => {
+        indicator.addEventListener('click', () => updateCarousel(i));
+    });
+
+    // 自动轮播
+    setInterval(() => {
+        updateCarousel((currentIndex + 1) % slides.length);
+        currentIndex = (currentIndex + 1) % slides.length;
+    }, 3000);
+</script>
 </body>
 </html>

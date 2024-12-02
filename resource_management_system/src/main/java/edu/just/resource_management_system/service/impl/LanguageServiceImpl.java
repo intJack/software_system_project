@@ -16,4 +16,9 @@ public class LanguageServiceImpl implements LanguageService {
     public List<Language> findAllLanguages() {
         return languageMapper.selectAllLanguages();
     }
+
+    @Override
+    public List<Long> findIdByTagAndLanguage(String tagName, String languageName) {
+        return languageMapper.selectIdByTagAndLanguage(tagName,languageName);
+    }
 }

@@ -80,18 +80,18 @@
 
 <div class="container">
   <h2 class="resource-title">资源查询</h2>
-  <form action="/resources/search" method="get">
+  <form th:action="@{/search}" method="POST">
     <label for="keyword">关键字：</label>
     <input type="text" id="keyword" name="keyword" placeholder="输入资源名称或描述">
 
     <label for="tag">标签：</label>
-    <select id="tag" name="tagId">
+    <select id="tag" name="tagName">
       <option value="">请选择标签</option>
       <option th:each="tag : ${allTags}" th:text="${tag.tagName}"></option>
     </select>
 
     <label for="language">开发语言：</label>
-    <select id="language" name="languageId">
+    <select id="language" name="languageName">
       <option value="">请选择语言</option>
       <option th:each="language : ${allLanguages}" th:text="${language.languageName}"></option>
     </select>

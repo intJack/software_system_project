@@ -10,5 +10,16 @@
     <select id="selectIdsByTags" resultType="java.lang.Long">
         SELECT id FROM tag_language as tl,tag as t WHERE tl.tag_name=t.tag_name and t.tag_name=#{tagName};
     </select>
+    <select id="selectIdByTagAndLanguage" resultType="java.lang.Long">
+        SELECT id FROM tag_language
+        <where>
+            <if test="tagName != '' and tagName != null">
+                tag_name = #{tagName}
+            </if>
+            <if test="languageName != '' and tagName != null">
+                and language_name = #{languageName}
+            </if>
+        </where>
+    </select>
 </mapper>
 

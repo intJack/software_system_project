@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.tymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>资源查询结果</title>
@@ -66,13 +66,12 @@
 <div class="container">
     <h2 class="resource-title">资源查询结果</h2>
     <ul class="resource-list">
-        <!-- 动态生成查询结果 -->
-        <c:forEach var="resource" items="${resources}">
+        <th:block th:each="resource : ${resources}">
             <li>
-                <a href="/resources/details/${resource.id}">${resource.title}</a>
-                <p>${resource.description}</p>
+                <a th:href="@{/resources/details/{id}(id=${resource.id})}" th:text="${resource.resourceTitle}"></a>
+                <p th:text="${resource.resourceDescription}"></p>
             </li>
-        </c:forEach>
+        </th:block>
     </ul>
 </div>
 

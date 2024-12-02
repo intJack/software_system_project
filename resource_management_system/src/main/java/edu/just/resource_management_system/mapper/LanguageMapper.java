@@ -1,6 +1,7 @@
 package edu.just.resource_management_system.mapper;
 
 import edu.just.resource_management_system.pojo.Language;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,4 +18,7 @@ public interface LanguageMapper {
      * @return
      */
     List<Long> selectIdsByLanguages(String language);
+
+    List<Long> selectIdByTagAndLanguage(@Param("tagName") String tagName,
+                                        @Param("languageName") String languageName);
 }

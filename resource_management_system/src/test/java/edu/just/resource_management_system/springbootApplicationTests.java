@@ -7,12 +7,16 @@ import edu.just.resource_management_system.mapper.UserMapper;
 import edu.just.resource_management_system.pojo.Admin;
 import edu.just.resource_management_system.pojo.User;
 import edu.just.resource_management_system.service.AdminService;
+import edu.just.resource_management_system.service.ResourceService;
+import edu.just.resource_management_system.service.TagService;
 import edu.just.resource_management_system.service.UserService;
 import edu.just.resource_management_system.util.MD5Util;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 @MapperScan(basePackages = "edu.just.resource_management_system.mapper")
 @SpringBootTest
@@ -101,5 +105,19 @@ class springbootApplicationTests {
         tagMapper.selectAllTags().forEach(System.out::println);
     }
 
+    @Autowired
+    ResourceService resourceService;
+    @Test
+    void test01(){
+//        resourceService.findResourcesByIdsAndKeyword(List.of(1L),"C++")
+//                .stream().forEach(System.out::println);
+    }
+    @Autowired
+    TagService tagService;
+    @Test
+    void test02(){
+        tagService.findIdByTagAndLanguage("C++","Chinese")
+                .stream().forEach(System.out::println);
+    }
 
 }

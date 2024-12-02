@@ -59,7 +59,65 @@ main {
 }
 
 .main-content {
-    width: 70%;
+    width: 100%;/* 确保轮播图和文章列表占据整个容器宽度 */
+}
+
+/* 轮播图样式 */
+.carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+.carousel-item {
+    flex: 0 0 100%; /* 确保每个轮播项占据100%的宽度 */
+    max-width: 100%; /* 防止轮播项超出容器宽度 */
+    transition: transform 0.5s ease;
+    position: relative; /* 添加相对定位 */
+
+}
+.carousel-item img {
+    width: 100%;
+    display: block;
+}
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    z-index: 10;
+}
+/* 轮播图指示器样式 */
+.carousel-indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+}
+.prev {
+    left: 10px;
+}
+.next {
+    right: 10px;
+}
+.carousel-indicator {
+    border: 1px solid #fff;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+.carousel-indicator.active {
+    background-color: #fff;
 }
 
 .post {
