@@ -15,10 +15,13 @@ import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @MapperScan(basePackages = "edu.just.resource_management_system.mapper")
+@EnableTransactionManagement
 @SpringBootTest
 class springbootApplicationTests {
 
@@ -58,20 +61,11 @@ class springbootApplicationTests {
 
     @Test
     void testUserMapper(){
-        User user = userService.findUserById(1L);
+        User u = new User("intJack", "6512bd43d9caa6e02c990b0a82652dca", "22210712234@edu.just.cn"
+                , "12345678999");
+        userService.modifyUserInfo(u);
+        User user = userService.findUserById(3L);
         System.out.println(user);
-        user.setUserPassword(MD5Util.encryptToMD5("789"));
-        user.setPhoneNumber("98765432101");
-        userService.modifyUserInfo(user);
-        System.out.println(userService.findUserById(1L));
-        user.setUserPassword(MD5Util.encryptToMD5(user.getUserPassword()));
-        user.setPhoneNumber("12345678901");
-        userService.modifyUserInfo(user);
-
-        User newUser = userService.login("root", MD5Util.encryptToMD5("123"));
-        assert (newUser != null);
-        User u = new User("jack", MD5Util.encryptToMD5("456"), "123456@qq.com", "12345678901");
-        userService.saveUser(u);
     }
     @Autowired
     private AdminService adminService;

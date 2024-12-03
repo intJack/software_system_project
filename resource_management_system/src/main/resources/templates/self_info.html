@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人信息</title>
+    <link rel="stylesheet" href="/css/HomePage.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Header styles */
+        header {
+            background-color: #3399FF;
+            padding: 10px 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .logo a {
+            color: #fff;
+            font-size: 24px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            color: #f4f4f4;
+            text-decoration: underline;
+        }
+
+        /* User info page */
+        .container {
+            width: 80%;
+            margin: 40px auto;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .user-header {
+            text-align: center;
+        }
+
+        .user-header img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .user-header h2 {
+            margin: 10px 0;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .user-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .info-section {
+            width: 100%;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .info-section h3 {
+            color: #3399FF;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .info-item span {
+            font-weight: bold;
+        }
+
+        .btn-edit {
+            display: inline-block;
+            padding: 8px 16px;
+            margin-top: 20px;
+            background-color: #3399FF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .btn-edit:hover {
+            background-color: #287ac7;
+        }
+
+    </style>
+</head>
+<body>
+<header>
+    <div class="navbar">
+        <div class="logo">
+            <a href="@{/}">资源管理系统</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a th:href="@{/}">首页</a></li>
+                <li><a href="#">论坛</a></li>
+                <li><a href="#">关于</a></li>
+                <li th:if="${session.userName == null}"><a th:href="@{/login}">登录</a></li>
+                <li th:if="${session.userName == null}"><a th:href="@{/register}">注册</a></li>
+                <li th:if="${session.userName != null}"><a th:text="${session.userName}" href="#"></a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+    <div class="info-section">
+        <h3>个人信息</h3>
+        <div class="info-item" style="display: none">
+            <span id="id" class="editable" th:text="${user_info.id}"></span>
+        </div>
+        <div class="info-item">
+            <span>用户名：</span>
+            <span id="userName" class="editable" th:text="${user_info.userName}"></span>
+        </div>
+        <div class="info-item">
+            <span>邮箱：</span>
+            <span id="email" class="editable" th:text="${user_info.email}"></span>
+        </div>
+        <div class="info-item">
+            <span>号码：</span>
+            <span id="phoneNumber" class="editable" th:text="${user_info.phoneNumber}"></span>
+        </div>
+        <a href="javascript:void(0)" class="btn-edit" id="editBtn">编辑资料</a>
+        <a href="/edit-password" class="btn-edit">修改密码</a>
+        <button id="saveBtn" style="display: none;" class="btn-edit">保存</button>
+    </div>
+</div>
+
+<script>
+    const editBtn = document.getElementById("editBtn");
+    const saveBtn = document.getElementById("saveBtn");
+    const editableFields = document.querySelectorAll(".editable");
+
+    editBtn.addEventListener("click", function () {
+        editableFields.forEach(field => {
+            const currentValue = field.textContent.trim();
+            const input = document.createElement("input");
+            input.type = "text";
+            input.value = currentValue;
+            input.className = "input-field";
+            input.style.width = "95%";
+            field.replaceWith(input);
+        });
+        editBtn.style.display = "none";
+        saveBtn.style.display = "inline-block";
+    });
+    saveBtn.addEventListener("click", function () {
+        const updatedData = {};
+
+        editableFields.forEach(field => {
+            let attr = field.getAttribute("id");
+            let val = field.textContent.trim();
+            // 将字段名和新值存储到对象中
+            updatedData[attr] = val;
+        });
+
+        console.log("更新后的数据：", updatedData); // 可以用于 AJAX 提交到后端
+        saveBtn.style.display = "none"; // 隐藏保存按钮
+        editBtn.style.display = "inline-block"; // 恢复显示编辑按钮
+
+        // 使用 jQuery 的 AJAX 提交数据
+        $.ajax({
+            url: '/updateuser',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(updatedData),
+            success: function (response) {
+                alert('更新成功！');
+            },
+            error: function () {
+                alert('更新失败，请重试！');
+            }
+        });
+    });
+</script>
+</body>
+</html>

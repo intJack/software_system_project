@@ -2,22 +2,24 @@ package edu.just.resource_management_system.controller;
 
 import edu.just.resource_management_system.pojo.Resource;
 import edu.just.resource_management_system.pojo.User;
+import edu.just.resource_management_system.service.LanguageService;
 import edu.just.resource_management_system.service.ResourceService;
+import edu.just.resource_management_system.service.TagService;
 import edu.just.resource_management_system.service.UserService;
 import edu.just.resource_management_system.util.MD5Util;
 import edu.just.resource_management_system.util.TokenUtil;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -34,34 +36,35 @@ public class UserController {
         return "home";
     }
 
-    /**
-     * 用户登录
-     * @param userName 用户名
-     * @param password 密码
-     * @param model 用于传递信息给视图
-     * @return 跳转到主页或者显示错误信息
-     */
-    @PostMapping("/login1")
-    public String login(@RequestParam("userName") String userName,
-                        @RequestParam("userPassword") String password, Model model) {
 
+    @PostMapping("/login1")
+    public ResponseEntity<Map<String,Object>> login(@RequestParam("userName") String userName,
+                                                    @RequestParam("userPassword") String password,
+                                                    HttpServletRequest request) {
         // 加密密码
         String encryptedPassword = MD5Util.encryptToMD5(password);
-
         // 调用服务进行登录验证
         User user = userService.login(userName, encryptedPassword);
 
         if (user != null) {
-            // 登录成功，跳转到主页
-            // 可以把用户信息添加到 Model 里
-            model.addAttribute("user", user);
-            return "home";
+            //往session域存userName 和 id
+            request.getSession().setAttribute("userName", user.getUserName());
+            request.getSession().setAttribute("id", user.getId());
+            String token = TokenUtil.token(user.getUserName(),user.getUserPassword());
+            // 设置cookie
+            Cookie tokenCookie = new Cookie("token", token);
+            tokenCookie.setHttpOnly(true);
+            tokenCookie.setPath("/");
+            //加入响应体当中
+            HashMap<String, Object> response = new HashMap<>();
+            response.put("token",token);
+            response.put("Id",user.getId());
+            response.put("userName",user.getUserName());
+            return ResponseEntity.ok(response);
         } else {
-            // 登录失败，返回登录页面并显示错误信息
-            model.addAttribute("error", "用户名或密码错误");
-            // 还停留在登录页面
-            model.addAttribute("error", "用户名或密码错误，请重新输入");
-            return "index";
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("error", "用户名或密码错误");
+            return ResponseEntity.status(401).body(errorResponse);
         }
     }
 
@@ -81,7 +84,37 @@ public class UserController {
         modelMap.addAttribute("resources",resources);
         return "results";
     }
-
+    /**
+     * 跳转到search界面 往modelmap加入所有标签和语言
+     * @return search.html
+     */
+    @Autowired
+    TagService tagService;
+    @Autowired
+    LanguageService languageService;
+    @GetMapping("/search")
+    public String searchPage(ModelMap modelMap) {
+        modelMap.addAttribute("allTags",tagService.findAllTags());
+        modelMap.addAttribute("allLanguages",languageService.findAllLanguages());
+        return "search";
+    }
+    /**
+     * 用户跳转到个人信息页面
+     */
+    @GetMapping("/selfinfo")
+    public String SelfInfoPage(HttpServletRequest request,Model model){
+        Long id = (Long) request.getSession().getAttribute("id");
+        User user = userService.findUserById(id);
+        model.addAttribute("user_info",user);
+        return "self_info";
+    }
+    @PostMapping("/updateuser")
+    @ResponseBody
+    public String updateUser(@RequestBody User user){
+//        System.out.println(user);
+        userService.modifyUserInfo(user);
+        return null;
+    }
     /**
      * 用户实现对语言的查询 点击语言相关的资源 然后跳转到查询结果页
      * @return

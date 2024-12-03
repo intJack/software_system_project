@@ -1,9 +1,9 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body {
             background-image: url("/backgroundimage.png");
@@ -11,6 +11,7 @@
             background-position: center;
             background-repeat: no-repeat;
             font-family: Arial, sans-serif;
+            background-color: #e0f7fa; /* Light blue background */
             margin: 0;
             padding: 0;
             display: flex;
@@ -59,18 +60,44 @@
 <body>
 <div class="container">
     <h1>登录界面</h1>
-    <form action="/SignIn" th:action="@{/login1}" method="post">
+    <form id="loginForm" th:action="@{/login1}" method="post">
         <label for="userName">用户名:</label>
         <input type="text" id="userName" name="userName" required />
         <label for="userPassword">密码:</label>
         <input type="password" id="userPassword" name="userPassword" required />
         <button type="submit">登录</button>
-        <p th:text="${error}" style="color: red;"></p>
+        <p id ="error-message" th:text="${error}" style="color: red;"></p>
         <p>
             还没有账号？
             <a th:href="@{/register}">点击这里 完成注册</a>
         </p>
     </form>
 </div>
+<script>
+    $('#loginForm').on('submit',function (e) {
+        e.preventDefault();
+        let userName = $('#userName').val();
+        let userPassword = $('#userPassword').val();
+        $('#error-message').text('');
+        $.ajax({
+            url: '/login1',
+            type: 'POST',
+            data: {
+                userName: userName,
+                userPassword: userPassword
+            },
+            success: function(response) {
+                window.location.href = '/home';
+            },
+            error: function(xhr) {
+                if (xhr.responseJSON && xhr.responseJSON.error) {
+                    $('#error-message').text(xhr.responseJSON.error);
+                } else {
+                    $('#error-message').text('登录失败，请重试。');
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>
