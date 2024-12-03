@@ -16,3 +16,4 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: edu.just.resource_management_system.pojo
 
+

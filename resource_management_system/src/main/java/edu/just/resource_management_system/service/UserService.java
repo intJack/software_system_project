@@ -1,6 +1,7 @@
 package edu.just.resource_management_system.service;
 
 import edu.just.resource_management_system.pojo.User;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

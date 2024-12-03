@@ -5,8 +5,10 @@ import edu.just.resource_management_system.pojo.User;
 import edu.just.resource_management_system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -34,6 +36,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void modifyUserInfo(User user) {
         userMapper.UpdateUserInfo(user);
     }

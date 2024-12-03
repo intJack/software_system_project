@@ -1,14 +1,10 @@
 package edu.just.resource_management_system.controller;
 
-import edu.just.resource_management_system.service.LanguageService;
-import edu.just.resource_management_system.service.TagService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * PageController的类不会做复杂业务逻辑处理，作为页面与页面之间的衔接
+ * PageController的类不会做复杂业务逻辑处理，仅仅作为页面与页面之间的衔接
  */
 @Controller
 public class PageController {
@@ -33,9 +29,6 @@ public class PageController {
     public String registerPage() {
         return "register";
     }
-    @GetMapping("/adminlogin")
-    public String AdminLoginPage(){
-        return "admin_login";
-    }
+
 
 }

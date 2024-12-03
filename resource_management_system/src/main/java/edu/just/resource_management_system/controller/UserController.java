@@ -108,7 +108,13 @@ public class UserController {
         model.addAttribute("user_info",user);
         return "self_info";
     }
-
+    @PostMapping("/updateuser")
+    @ResponseBody
+    public String updateUser(@RequestBody User user){
+//        System.out.println(user);
+        userService.modifyUserInfo(user);
+        return null;
+    }
     /**
      * 用户实现对语言的查询 点击语言相关的资源 然后跳转到查询结果页
      * @return

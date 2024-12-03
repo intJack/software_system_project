@@ -12,7 +12,7 @@
     }
 
     .container {
-      width: 80%;
+      width: 100%;
       margin: 0 auto;
       padding: 20px;
       background-color: white;
@@ -122,36 +122,30 @@
 </header>
 
 <div class="container">
-  <h1>管理员后台</h1>
-  <h2>登录历史</h2>
+  <h1>管理员后台管理</h1>
 
   <table>
     <thead>
     <tr>
       <th>序号</th>
       <th>用户名</th>
-      <th>登录时间</th>
-      <th>IP地址</th>
-      <th>浏览器</th>
+      <th>电子邮箱</th>
+      <th>电话号码</th>
+      <th>操作</th>
     </tr>
     </thead>
     <tbody>
     <!-- 循环展示登录历史记录 -->
-    <tr th:each="history, iterStat : ${loginHistories}">
-      <!-- 序号，仅当有数据时显示 -->
-      <td th:if="${history.username != null}" th:text="${iterStat.index + 1}"></td> <!-- 序号 -->
+    <tr th:each="user : ${allUsers}">
+      <td th:if="${user.id != null}" th:text="${user.id}"></td> <!-- 序号 -->
 
-      <!-- 仅当用户名不为空时显示该列 -->
-      <td th:if="${history.username != null}" th:text="${history.username}"></td>
+      <td th:if="${user.userName != null}" th:text="${user.userName}"></td>
 
-      <!-- 仅当登录时间不为空时显示该列 -->
-      <td th:if="${history.loginTime != null}" th:text="${history.loginTime}"></td>
+      <td th:if="${user.email != null}" th:text="${user.email}"></td>
 
-      <!-- 仅当IP地址不为空时显示该列 -->
-      <td th:if="${history.ipAddress != null}" th:text="${history.ipAddress}"></td>
+      <td th:if="${user.phoneNumber != null}" th:text="${user.phoneNumber}"></td>
 
-      <!-- 仅当浏览器信息不为空时显示该列 -->
-      <td th:if="${history.browser != null}" th:text="${history.browser}"></td>
+      <td><a th:text="删除" th:href="'/user/' + ${user.id}"></a></td>
     </tr>
     </tbody>
   </table>
