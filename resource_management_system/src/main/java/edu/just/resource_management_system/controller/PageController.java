@@ -30,5 +30,10 @@ public class PageController {
         return "register";
     }
 
+        @GetMapping("/edit-password")
+        public String editPassword() {
+            return "password";
+        }
+
 
 }
