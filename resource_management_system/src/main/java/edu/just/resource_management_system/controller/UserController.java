@@ -2,7 +2,9 @@ package edu.just.resource_management_system.controller;
 
 import edu.just.resource_management_system.pojo.Resource;
 import edu.just.resource_management_system.pojo.User;
+import edu.just.resource_management_system.service.LanguageService;
 import edu.just.resource_management_system.service.ResourceService;
+import edu.just.resource_management_system.service.TagService;
 import edu.just.resource_management_system.service.UserService;
 import edu.just.resource_management_system.util.MD5Util;
 import edu.just.resource_management_system.util.TokenUtil;
@@ -45,8 +47,9 @@ public class UserController {
         User user = userService.login(userName, encryptedPassword);
 
         if (user != null) {
-            //往session域存userName
+            //往session域存userName 和 id
             request.getSession().setAttribute("userName", user.getUserName());
+            request.getSession().setAttribute("id", user.getId());
             String token = TokenUtil.token(user.getUserName(),user.getUserPassword());
             // 设置cookie
             Cookie tokenCookie = new Cookie("token", token);
@@ -80,6 +83,30 @@ public class UserController {
         List<Resource> resources = resourceService.findResourcesByIdsAndKeyword(tagName, languageName, keyword);
         modelMap.addAttribute("resources",resources);
         return "results";
+    }
+    /**
+     * 跳转到search界面 往modelmap加入所有标签和语言
+     * @return search.html
+     */
+    @Autowired
+    TagService tagService;
+    @Autowired
+    LanguageService languageService;
+    @GetMapping("/search")
+    public String searchPage(ModelMap modelMap) {
+        modelMap.addAttribute("allTags",tagService.findAllTags());
+        modelMap.addAttribute("allLanguages",languageService.findAllLanguages());
+        return "search";
+    }
+    /**
+     * 用户跳转到个人信息页面
+     */
+    @GetMapping("/selfinfo")
+    public String SelfInfoPage(HttpServletRequest request,Model model){
+        Long id = (Long) request.getSession().getAttribute("id");
+        User user = userService.findUserById(id);
+        model.addAttribute("user_info",user);
+        return "self_info";
     }
 
     /**
