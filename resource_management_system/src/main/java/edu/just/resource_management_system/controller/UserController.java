@@ -6,20 +6,21 @@ import edu.just.resource_management_system.service.ResourceService;
 import edu.just.resource_management_system.service.UserService;
 import edu.just.resource_management_system.util.MD5Util;
 import edu.just.resource_management_system.util.TokenUtil;
+import jakarta.servlet.http.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
+@SessionAttributes("userName")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -34,16 +35,10 @@ public class UserController {
         return "home";
     }
 
-    /**
-     * 用户登录
-     * @param userName 用户名
-     * @param password 密码
-     * @param model 用于传递信息给视图
-     * @return 跳转到主页或者显示错误信息
-     */
+
     @PostMapping("/login1")
-    public String login(@RequestParam("userName") String userName,
-                        @RequestParam("userPassword") String password, Model model) {
+    public ResponseEntity<Map<String,Object>> login(@RequestParam("userName") String userName,
+                                     @RequestParam("userPassword") String password, Model model) {
 
         // 加密密码
         String encryptedPassword = MD5Util.encryptToMD5(password);
@@ -52,16 +47,22 @@ public class UserController {
         User user = userService.login(userName, encryptedPassword);
 
         if (user != null) {
-            // 登录成功，跳转到主页
-            // 可以把用户信息添加到 Model 里
-            model.addAttribute("user", user);
-            return "home";
+//            model.addAttribute("userName",userName);
+            String token = TokenUtil.token(user.getUserName(),user.getUserPassword());
+            // 设置cookie
+            Cookie tokenCookie = new Cookie("token", token);
+            tokenCookie.setHttpOnly(true);
+            tokenCookie.setPath("/");
+            //加入响应体当中
+            HashMap<String, Object> response = new HashMap<>();
+            response.put("token",token);
+            response.put("Id",user.getId());
+            response.put("userName",user.getUserName());
+            return ResponseEntity.ok(response);
         } else {
-            // 登录失败，返回登录页面并显示错误信息
-            model.addAttribute("error", "用户名或密码错误");
-            // 还停留在登录页面
-            model.addAttribute("error", "用户名或密码错误，请重新输入");
-            return "index";
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("error", "用户名或密码错误");
+            return ResponseEntity.status(401).body(errorResponse);
         }
     }
 

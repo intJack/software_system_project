@@ -16,7 +16,6 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
 
 @MapperScan(basePackages = "edu.just.resource_management_system.mapper")
 @SpringBootTest

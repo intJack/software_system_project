@@ -44,6 +44,10 @@ public class User {
         return userName;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getUserPassword() {
         return userPassword;
     }
