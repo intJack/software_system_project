@@ -8,10 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class HomeController {
+public class PageController {
 
     @GetMapping("/")
     public String redirectToHome() {
@@ -32,6 +31,10 @@ public class HomeController {
     @GetMapping("/register")
     public String registerPage() {
         return "register";
+    }
+    @GetMapping("/adminlogin")
+    public String AdminLoginPage(){
+        return "admin_login";
     }
 
     /**

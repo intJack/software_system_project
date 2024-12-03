@@ -7,8 +7,8 @@ import edu.just.resource_management_system.service.UserService;
 import edu.just.resource_management_system.util.MD5Util;
 import edu.just.resource_management_system.util.TokenUtil;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@SessionAttributes("userName")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -38,16 +37,16 @@ public class UserController {
 
     @PostMapping("/login1")
     public ResponseEntity<Map<String,Object>> login(@RequestParam("userName") String userName,
-                                     @RequestParam("userPassword") String password, Model model) {
-
+                                                    @RequestParam("userPassword") String password,
+                                                    HttpServletRequest request) {
         // 加密密码
         String encryptedPassword = MD5Util.encryptToMD5(password);
-
         // 调用服务进行登录验证
         User user = userService.login(userName, encryptedPassword);
 
         if (user != null) {
-//            model.addAttribute("userName",userName);
+            //往session域存userName
+            request.getSession().setAttribute("userName", user.getUserName());
             String token = TokenUtil.token(user.getUserName(),user.getUserPassword());
             // 设置cookie
             Cookie tokenCookie = new Cookie("token", token);
