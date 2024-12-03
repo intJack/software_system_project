@@ -31,6 +31,8 @@ class springbootApplicationTests {
 
     @Autowired
     private UserMapper userMapper;
+
+
     /**
      * 这是user登录接口的测试
      */
@@ -61,23 +63,20 @@ class springbootApplicationTests {
 
     @Test
     void testUserMapper(){
-        User u = new User("intJack", "6512bd43d9caa6e02c990b0a82652dca", "22210712234@edu.just.cn"
-                , "12345678999");
-        userService.modifyUserInfo(u);
-        User user = userService.findUserById(3L);
-        System.out.println(user);
+       userService.modifyUserInfo("zzz","155151","12345678901",6L);
+
     }
     @Autowired
     private AdminService adminService;
     @Test
     void testAdminMapper(){
-        adminService.login("root","123456");
+//        adminService.login("root","654321");
         Admin admin = adminService.selectAdminById(1L);
         assert (admin!=null);
-        admin.setAdminPassword(MD5Util.encryptToMD5(admin.getAdminPassword()));
+        admin.setAdminPassword(MD5Util.encryptToMD5("99875516"));
         adminService.modifyAdminInfo(admin);
-        Admin admin0 = new Admin("admin", "654");
-        adminService.saveAdmin(admin0);
+//        Admin admin0 = new Admin("admin", "654");
+//        adminService.saveAdmin(admin0);
     }
 
     @Autowired

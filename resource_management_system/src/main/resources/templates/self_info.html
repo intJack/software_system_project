@@ -185,25 +185,30 @@
             input.value = currentValue;
             input.className = "input-field";
             input.style.width = "95%";
+            input.setAttribute("id",field.getAttribute("id"));
             field.replaceWith(input);
         });
         editBtn.style.display = "none";
         saveBtn.style.display = "inline-block";
     });
     saveBtn.addEventListener("click", function () {
+        const inputFields = document.querySelectorAll(".input-field");
         const updatedData = {};
 
-        editableFields.forEach(field => {
-            let attr = field.getAttribute("id");
-            let val = field.textContent.trim();
-            // 将字段名和新值存储到对象中
-            updatedData[attr] = val;
+        inputFields.forEach(input => {
+            const span = document.createElement("span");
+            span.textContent = input.value.trim();
+            const fileName = input.getAttribute("id");
+            span.className = "editable";
+            span.setAttribute("id",fileName);
+            input.replaceWith(span);
+
+            updatedData[fileName]=span.textContent;
         });
 
         console.log("更新后的数据：", updatedData); // 可以用于 AJAX 提交到后端
         saveBtn.style.display = "none"; // 隐藏保存按钮
-        editBtn.style.display = "inline-block"; // 恢复显示编辑按钮
-
+        editBtn.style.display = "inline-block"; // 恢复显示编辑按
         // 使用 jQuery 的 AJAX 提交数据
         $.ajax({
             url: '/updateuser',

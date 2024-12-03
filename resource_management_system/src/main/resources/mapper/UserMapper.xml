@@ -3,8 +3,8 @@
 <mapper namespace="edu.just.resource_management_system.mapper.UserMapper">
     <update id="UpdateUserInfo">
         UPDATE wx_user
-        SET user_name = #{user.userName}, email = #{user.email}, phone_number = #{user.phoneNumber}
-        WHERE id = #{user.id};
+        SET user_name = #{userName},email = #{email}, phone_number = #{phoneNumber}
+        WHERE id = #{id};
     </update>
     <select id="selectAll" resultType="edu.just.resource_management_system.pojo.User">
         SELECT * FROM wx_user;

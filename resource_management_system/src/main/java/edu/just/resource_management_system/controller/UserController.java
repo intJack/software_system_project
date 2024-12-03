@@ -11,6 +11,7 @@ import edu.just.resource_management_system.util.TokenUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -108,12 +109,16 @@ public class UserController {
         model.addAttribute("user_info",user);
         return "self_info";
     }
+
     @PostMapping("/updateuser")
-    @ResponseBody
-    public String updateUser(@RequestBody User user){
-//        System.out.println(user);
-        userService.modifyUserInfo(user);
-        return null;
+    public ResponseEntity<String> updateUser(@RequestBody User user) {
+        try {
+            System.out.println(user);
+            userService.modifyUserInfo(user.getUserName(), user.getEmail(), user.getPhoneNumber(), user.getId());
+            return ResponseEntity.ok("更新成功！");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("更新失败，请重试！");
+        }
     }
     /**
      * 用户实现对语言的查询 点击语言相关的资源 然后跳转到查询结果页

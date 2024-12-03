@@ -36,8 +36,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
-    public void modifyUserInfo(User user) {
-        userMapper.UpdateUserInfo(user);
+    public void modifyUserInfo(String userName, String email, String phoneNumber, Long id) {
+        userMapper.UpdateUserInfo(userName,email,phoneNumber,id);
     }
 }

@@ -33,10 +33,9 @@ public interface UserMapper {
      */
     void register(User user);
 
-    /**
-     * 根据 用户id 修改 用户信息
-     * @param user
-     */
-    void UpdateUserInfo(@Param("user") User user);
+
+    void UpdateUserInfo(@Param("userName")String userName,
+                        @Param("email")String email,@Param("phoneNumber")String phoneNumber,
+                        @Param("id")Long id);
 
 }

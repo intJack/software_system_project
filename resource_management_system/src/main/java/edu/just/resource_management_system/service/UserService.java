@@ -10,5 +10,5 @@ public interface UserService {
     User findUserById(Long id);
     User login(String userName,String password);
     void saveUser(User user);
-    void modifyUserInfo(User user);
+    void modifyUserInfo(String userName,String email,String phoneNumber,Long id);
 }
