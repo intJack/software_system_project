@@ -6,6 +6,10 @@
         SET user_name = #{userName},email = #{email}, phone_number = #{phoneNumber}
         WHERE id = #{id};
     </update>
+    <update id="UpdateUserPassword">
+        UPDATE wx_user
+        SET user_password = #{userPassword} where id = #{id};
+    </update>
     <select id="selectAll" resultType="edu.just.resource_management_system.pojo.User">
         SELECT * FROM wx_user;
     </select>

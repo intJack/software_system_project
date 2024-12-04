@@ -63,8 +63,8 @@ class springbootApplicationTests {
 
     @Test
     void testUserMapper(){
-       userService.modifyUserInfo("zzz","155151","12345678901",6L);
-
+//       userService.modifyUserInfo("zzz","155151","12345678901",6L);
+        userMapper.UpdateUserPassword("111",1L);
     }
     @Autowired
     private AdminService adminService;

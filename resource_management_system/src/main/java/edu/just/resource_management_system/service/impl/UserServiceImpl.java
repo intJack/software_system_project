@@ -39,4 +39,9 @@ public class UserServiceImpl implements UserService {
     public void modifyUserInfo(String userName, String email, String phoneNumber, Long id) {
         userMapper.UpdateUserInfo(userName,email,phoneNumber,id);
     }
+
+    @Override
+    public void modifyUserPassword(String userPassword, Long id) {
+        userMapper.UpdateUserPassword(userPassword,id);
+    }
 }

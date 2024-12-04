@@ -37,5 +37,5 @@ public interface UserMapper {
     void UpdateUserInfo(@Param("userName")String userName,
                         @Param("email")String email,@Param("phoneNumber")String phoneNumber,
                         @Param("id")Long id);
-
+    void UpdateUserPassword(@Param("userPassword")String userPassword,@Param("id")Long id);
 }
