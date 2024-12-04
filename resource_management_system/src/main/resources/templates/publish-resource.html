@@ -40,7 +40,7 @@
             display: block; /* Each label occupies a line */
             color: #333;
         }
-        input[type="text"], select {
+        input[type="text"], textarea, select {
             width: 100%;
             padding: 10px;
             margin-top: 5px;
@@ -83,6 +83,9 @@
             <!-- 假设您有一个名为 allLanguages 的变量，其中包含所有语言 -->
             <option th:each="language : ${allLanguages}" th:text="${language.languageName}" th:value="${language.id}"></option>
         </select>
+
+        <label for="description">资源描述：</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
 
         <button type="submit">发布资源</button>
     </form>
