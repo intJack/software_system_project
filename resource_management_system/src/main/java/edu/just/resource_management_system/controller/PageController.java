@@ -19,11 +19,14 @@ public class PageController {
     public String homePage() {
         return "home";
     }
-
+    //用户登录
     @GetMapping("/login")
     public String loginPage() {
         return "index";
     }
+    // 跳转到管理员登录页面
+    @GetMapping("/managerlogin")
+    public String showManagerLoginPage() {return "manager_login";}
 
     @GetMapping("/register")
     public String registerPage() {
