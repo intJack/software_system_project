@@ -66,7 +66,7 @@
 <body>
 <div class="form-container">
     <h2>发布资源</h2>
-    <form action="/submit-resource" method="POST">
+    <form th:action="@{/submit-resource}" method="POST">
         <label for="resourceTitle">资源标题：</label>
         <input type="text" id="resourceTitle" name="resourceTitle" required>
 
@@ -83,8 +83,7 @@
         </select>
 
         <label for="description">资源描述：</label>
-        <textarea id="description" name="description" rows="4" required></textarea>
-
+        <textarea id="description" name="resourceDescription" rows="4" required></textarea>
         <button type="submit">发布资源</button>
     </form>
 </div>

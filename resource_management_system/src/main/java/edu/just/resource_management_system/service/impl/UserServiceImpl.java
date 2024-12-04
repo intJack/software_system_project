@@ -44,4 +44,9 @@ public class UserServiceImpl implements UserService {
     public void modifyUserPassword(String userPassword, Long id) {
         userMapper.UpdateUserPassword(userPassword,id);
     }
+
+    @Override
+    public void submitResource(Long user_id,String resourceTitle, String tagName, String languageName, String resourceDescription) {
+        userMapper.InsertResource(user_id,resourceTitle,tagName,languageName,resourceDescription);
+    }
 }

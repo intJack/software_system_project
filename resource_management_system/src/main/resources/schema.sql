@@ -96,7 +96,16 @@ CREATE TABLE carousel(
 INSERT INTO carousel(carousel_url,carousel_description)values('https://www.bing.com/th/id/OIP.iIXOmGDzrtTJmdwbn7cGMwHaEJ','java图片');
 INSERT INTO carousel(carousel_url, carousel_description) VALUES('https://www.bing.com/th/id/OIP.dJToM1TiZiJA0GYwzDHwjQHaHY?w=218&h=217&c=7&r=0&o=5&dpr=1.5&pid=1.7', 'python图片');
 
-
+# 涉及到用户上传资源,管理员审核资源.需要新建一个表resource_temp,存储待审核的资源
+CREATE TABLE resources_temp (
+                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                           user_id BIGINT,
+                           file_path VARCHAR(255),
+                           upload_time TIMESTAMP,
+                           status ENUM('待审核', '已通过', '已拒绝') DEFAULT '待审核',
+                           review_time TIMESTAMP,
+                           review_by BIGINT #这个是审核管理员的id
+);
 
 
 
