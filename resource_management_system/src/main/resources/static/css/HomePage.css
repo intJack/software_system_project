@@ -6,6 +6,7 @@
 }
 
 body {
+
     font-family: Arial, sans-serif;
     background-color: #e0f7fa;
     color: #333;
@@ -22,7 +23,7 @@ ul {
 
 /* 顶部导航栏 */
 header {
-    background-color: #3399FF;
+    background-color: #2770b8;
     color: white;
     padding: 10px 0;
 }
@@ -65,11 +66,13 @@ main {
 
 
 .post {
+
     background-color: white;
     padding: 20px;
     margin-bottom: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
 
 .post h2 a {
     color: #333;

@@ -6,6 +6,19 @@
     <title>资源管理系统首页</title>
     <link rel="stylesheet" href="/css/HomePage.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body{
+            background-image: url("/background2.png");
+        }
+        .post {
+            opacity: 0.8; /* 设置透明度为0.8，您可以根据需要调整这个值 */
+            transition: opacity 0.3s; /* 添加过渡效果，使得透明度变化更平滑 */
+        }
+
+        .post:hover {
+            opacity: 1; /* 鼠标悬停时透明度为1（完全不透明） */
+        }
+    </style>
     <script>
         setInterval(test,2000);//切换时间间隔
         var array = [];
