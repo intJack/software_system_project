@@ -36,4 +36,6 @@ public interface AdminMapper {
      * @param id 用户id
      */
     void deleteUserById(Long id);
+
+
 }
