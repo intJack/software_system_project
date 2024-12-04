@@ -38,4 +38,11 @@ public interface UserMapper {
                         @Param("email")String email,@Param("phoneNumber")String phoneNumber,
                         @Param("id")Long id);
     void UpdateUserPassword(@Param("userPassword")String userPassword,@Param("id")Long id);
+
+    /**
+     * 用户提交资源 并不会直接提交到资源表 需要经过管理员的审核 才能加入到资源部
+     */
+    void InsertResource(@Param("user_id")Long user_id,@Param("resourceTitle")String resourceTitle,@Param("tagName")String tagName,
+                        @Param("languageName")String languageName,@Param("resourceDescription")String resourceDescription);
+
 }

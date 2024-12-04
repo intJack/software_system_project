@@ -23,5 +23,9 @@
         INSERT INTO wx_user (user_name, user_password, email, phone_number)
         VALUES (#{userName}, #{userPassword}, #{email}, #{phoneNumber});
     </insert>
+    <insert id="InsertResource">
+        INSERT INTO resources_temp(user_id,resource_title,tag_name,language_name,resource_description)
+        VALUES (#{user_id},#{resourceTitle},#{tagName},#{languageName},#{resourceDescription});
+    </insert>
 
 </mapper>

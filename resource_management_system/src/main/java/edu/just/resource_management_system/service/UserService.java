@@ -12,4 +12,5 @@ public interface UserService {
     void saveUser(User user);
     void modifyUserInfo(String userName,String email,String phoneNumber,Long id);
     void modifyUserPassword(String userPassword,Long id);
+    void submitResource(Long user_id,String resourceTitle,String tagName,String languageName,String resourceDescription);
 }

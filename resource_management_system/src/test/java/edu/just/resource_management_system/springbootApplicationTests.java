@@ -63,8 +63,10 @@ class springbootApplicationTests {
 
     @Test
     void testUserMapper(){
+//        userService.submitResource("深入理解JVM虚拟机","Java","English","理解JVM的一本书");
 //       userService.modifyUserInfo("zzz","155151","12345678901",6L);
-        userMapper.UpdateUserPassword("111",1L);
+//        userMapper.UpdateUserPassword("111",1L);
+//        userMapper.SubmitResource();
     }
     @Autowired
     private AdminService adminService;

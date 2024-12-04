@@ -159,6 +159,25 @@ public class UserController {
         model.addAttribute("allLanguages",allLanguages);
         return "publish-resource";
     }
+    @PostMapping("/submit-resource")
+    public ResponseEntity<Map<String,Object>> SubmitResource(@RequestParam("resourceTitle")String resourceTitle,
+                                                             @RequestParam("tagName")String tagName,
+                                                             @RequestParam("languageName")String languageName,
+                                                             @RequestParam("resourceDescription")String resourceDescription,
+                                                             HttpServletRequest request){
+        Long id = (Long) request.getSession().getAttribute("id");
+        HashMap<String, Object> response = new HashMap<>();
+        try{
+            userService.submitResource(id,resourceTitle,tagName,languageName,resourceDescription);
+            response.put("success","添加成功");
+            return ResponseEntity.ok(response);
+        }catch (Exception e){
+            e.printStackTrace();
+            response.put("success", false);
+            response.put("message", "添加失败，请联系系统管理员");
+            return ResponseEntity.status(401).body(response);
+        }
+    }
 
 //    /**
 //     * 提交发布的资源
