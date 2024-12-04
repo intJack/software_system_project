@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>管理员后台 - 审核资源</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -89,6 +90,19 @@
     nav ul li a:active {
       color: #c9c9c9;
     }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #593a21; /* Light blue button */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover {
+      background-color: #593a21; /* Darker blue on hover */
+    }
   </style>
 </head>
 <body>
@@ -104,7 +118,8 @@
         <li><a th:href="@{/}">首页</a></li>
         <li><a href="#">论坛</a></li>
         <li><a href="#">关于</a></li>
-        <li th:if="${session.userName == null}"><a th:href="@{/managerlogin}">管理员登录</a></li>
+<!--        <li th:if="${session.userName == null}"><a th:href="@{/managerlogin}">管理员登录</a></li>-->
+        <li th:if="${session.adminName != null}"><a th:href="@{/resource_check}" >审核资源</a></li>
         <li th:if="${session.userName != null}"><a th:text="${session.userName}" href="#"></a></li>
       </ul>
     </nav>
@@ -137,7 +152,13 @@
     </tr>
     </tbody>
   </table>
+  <button type="button"  class="backButton">返回</button>
 </div>
-
+<script>
+  // 为返回按钮添加点击事件
+  $('.backButton').on('click', function () {
+    window.history.back(); // 返回上一个页面
+  });
+</script>
 </body>
 </html>

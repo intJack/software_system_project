@@ -77,12 +77,12 @@ class springbootApplicationTests {
 //        Admin admin0 = new Admin("root", "654");
 //        System.out.println(admin0.getAdminPassword());
 //        adminService.saveAdmin(admin0);
-        // 加密密码
+////         加密密码
 //        String encryptedPassword = MD5Util.encryptToMD5("654");
-        // 调用服务进行登录验证
+////         调用服务进行登录验证
 //        Admin admin = Admi("root","ab233b682ec355648e7891e66c54191b");
-        Admin admin = adminService.login("root", "ab233b682ec355648e7891e66c54191b");
-        System.out.println(admin);
+//        Admin admin = adminService.login("root", "ab233b682ec355648e7891e66c54191b");
+//        System.out.println(admin);
     }
 
     @Autowired
