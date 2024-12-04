@@ -62,13 +62,14 @@
 
 
 <div class="container">
-    <h1>登录界面</h1>
+    <h1>管理员登录界面</h1>
     <form id="loginForm" th:action="@{/managerlogin}" method="post">
         <label for="userName">用户名:</label>
         <input type="text" id="userName" name="userName" required />
         <label for="userPassword">密码:</label>
         <input type="password" id="userPassword" name="userPassword" required />
         <button type="submit">登录</button>
+        <button type="button"  class="backButton">返回</button>
         <p id ="error-message" th:text="${error}" style="color: red;"></p>
         <p>
             还没有账号？
@@ -101,6 +102,10 @@
                 }
             }
         });
+    });
+    // 为返回按钮添加点击事件
+    $('.backButton').on('click', function () {
+        window.history.back(); // 返回上一个页面
     });
 </script>
 </body>

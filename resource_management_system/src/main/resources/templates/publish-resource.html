@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>发布资源</title>
     <link rel="stylesheet" href="/css/HomePage.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body {
             background-image: url("/backgroundimage.png");
@@ -48,7 +49,7 @@
             border-radius: 5px;
             box-sizing: border-box; /* Include border and padding */
         }
-        button[type="submit"] {
+        button {
             width: 100%;
             padding: 10px;
             background-color: #006064; /* Light blue button */
@@ -58,7 +59,7 @@
             cursor: pointer;
             margin-top: 15px;
         }
-        button[type="submit"]:hover {
+        button:hover {
             background-color: #004d40; /* Darker blue on hover */
         }
     </style>
@@ -85,6 +86,8 @@
         <label for="description">资源描述：</label>
         <textarea id="description" name="resourceDescription" rows="4" required></textarea>
         <button type="submit">发布资源</button>
+        <button type="button"  class="backButton">返回</button>
+
     </form>
 </div>
 <script>
@@ -126,6 +129,10 @@
                     alert('提交过程中发生错误，请稍后再试。');
                 });
         });
+    });
+    // 为返回按钮添加点击事件
+    $('.backButton').on('click', function () {
+        window.history.back(); // 返回上一个页面
     });
 </script>
 </body>

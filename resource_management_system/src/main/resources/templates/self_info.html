@@ -148,8 +148,8 @@
                 <li><a href="#">论坛</a></li>
                 <li><a href="#">关于</a></li>
                 <li><a th:href="@{/publish-resource}">发布资源</a></li>
-<!--                <li th:if="${session.userName == null}"><a th:href="@{/login}">登录</a></li>-->
-<!--                <li th:if="${session.userName == null}"><a th:href="@{/register}">注册</a></li>-->
+                <li th:if="${session.userName == null}"><a th:href="@{/login}">登录</a></li>
+                <li th:if="${session.userName == null}"><a th:href="@{/register}">注册</a></li>
                 <li th:if="${session.userName != null}"><a th:text="${session.userName}" href="#"></a></li>
             </ul>
         </nav>
