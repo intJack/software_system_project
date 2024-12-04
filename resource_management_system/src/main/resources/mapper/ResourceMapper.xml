@@ -26,7 +26,7 @@
                 </foreach>
             </if>
             <if test="keyword != '' and keyword != null">
-                AND resource_title LIKE CONCAT('%',#{keyword},'%')
+                AND resource_title LIKE '%${keyword}'('%',#{keyword},'%')
             </if>
         </where>
     </select>
