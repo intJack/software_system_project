@@ -124,4 +124,30 @@ public class UserController {
         //跳转到查询结果页
         return "";
     }
+
+    /**
+     * 跳转到发布资源页面
+     * @return 发布资源页面的视图名称
+     */
+    @GetMapping("/publish-resource")
+    public String publishResourcePage() {
+        return "publish-resource"; // 假设你的发布资源页面的HTML文件名为 publish-resource.html
+    }
+
+//    /**
+//     * 提交发布的资源
+//     * @param resource 资源对象
+//     * @return 提交后的响应
+//     */
+//    @PostMapping("/submit-resource")
+//    public ResponseEntity<String> submitResource(@RequestBody Resource resource) {
+//        try {
+//            // 假设资源提交后需要保存到数据库
+//            resourceService.saveResource(resource);
+//            return ResponseEntity.ok("资源发布成功！");
+//        } catch (Exception e) {
+//            // 处理异常情况，例如保存失败
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("资源发布失败：" + e.getMessage());
+//        }
+//    }
 }

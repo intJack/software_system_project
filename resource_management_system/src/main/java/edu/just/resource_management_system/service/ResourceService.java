@@ -11,4 +11,5 @@ public interface ResourceService {
      */
     List<Resource> findResourcesByIdsAndKeyword(String tagName,String languageName,
                                                 String keyword);
+//    void saveResource(Resource resource);
 }

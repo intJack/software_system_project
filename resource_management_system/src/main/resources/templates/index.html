@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body {
@@ -58,6 +59,8 @@
     </style>
 </head>
 <body>
+
+
 <div class="container">
     <h1>登录界面</h1>
     <form id="loginForm" th:action="@{/login1}" method="post">
@@ -73,6 +76,7 @@
         </p>
     </form>
 </div>
+
 <script>
     $('#loginForm').on('submit',function (e) {
         e.preventDefault();
