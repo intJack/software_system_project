@@ -22,4 +22,12 @@ public interface TagMapper {
 
     List<Long> selectIdByTagAndLanguage(@Param("tagName") String tagName,
                                         @Param("languageName") String languageName);
+    /**
+     * 判断该标签是否在tag库中存在
+     */
+    String selectTagNameByTagName(String tagName);
+    /**
+     * 插入新的标签
+     */
+    void insertTagName(String tagName);
 }

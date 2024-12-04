@@ -28,6 +28,8 @@ class springbootApplicationTests {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private ResourceMapper resourceMapper;
 
 
     /**
@@ -77,12 +79,16 @@ class springbootApplicationTests {
 //        Admin admin0 = new Admin("root", "654");
 //        System.out.println(admin0.getAdminPassword());
 //        adminService.saveAdmin(admin0);
-////         加密密码
+        // 加密密码
 //        String encryptedPassword = MD5Util.encryptToMD5("654");
-////         调用服务进行登录验证
+        // 调用服务进行登录验证
 //        Admin admin = Admi("root","ab233b682ec355648e7891e66c54191b");
 //        Admin admin = adminService.login("root", "ab233b682ec355648e7891e66c54191b");
 //        System.out.println(admin);
+//        Admin admin = new Admin("admin", "654");
+//        adminService.saveAdmin(admin);
+        Long chinese = resourceMapper.findIdByTagNameAndLanguageName("C++", "Chinese");
+        System.out.println(chinese);
     }
 
     @Autowired
@@ -108,9 +114,16 @@ class springbootApplicationTests {
     ResourceService resourceService;
     @Test
     void test01(){
-        resourceService.findAllResources().stream().forEach(System.out::println);
+//        resourceService.findAllResources().stream().forEach(System.out::println);
 //        resourceService.findResourcesByIdsAndKeyword(List.of(1L),"C++")
 //                .stream().forEach(System.out::println);
+//        System.out.println(tagService.findTagNameByTagName("C++"));
+//        tagMapper.insertTagName("php");
+//        System.out.println(languageMapper.selectLanguageNameByLanguageName("www"));
+//        languageMapper.insertLanguageName("Germans");
+//        resourceMapper.insertTagNameAndLanguageName("php","Chinese");
+//        Long id = resourceMapper.findIdByTagNameAndLanguageName("php", "Chinese");
+//        System.out.println(id);
     }
     @Autowired
     TagService tagService;

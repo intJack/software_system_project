@@ -3,7 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.just.resource_management_system.mapper.TagMapper">
-
+    <insert id="insertTagName">
+        INSERT INTO tag(tag_name) VALUES (#{tagName});
+    </insert>
     <select id="selectAllTags" resultType="edu.just.resource_management_system.pojo.Tag">
         SELECT * FROM tag;
     </select>
@@ -20,6 +22,10 @@
                 and language_name = #{languageName}
             </if>
         </where>
+    </select>
+
+    <select id="selectTagNameByTagName" resultType="java.lang.String">
+        SELECT tag_name from tag where tag_name = #{tagName};
     </select>
 </mapper>
 

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="edu.just.resource_management_system.mapper.LanguageMapper">
+    <insert id="insertLanguageName">
+        INSERT INTO language(language_name)VALUES (#{languageName});
+    </insert>
 
     <select id="selectAllLanguages" resultType="edu.just.resource_management_system.pojo.Language">
         select * from language;
@@ -19,6 +22,9 @@
                 and language_name = #{languageName}
             </if>
         </where>
+    </select>
+    <select id="selectLanguageNameByLanguageName" resultType="java.lang.String">
+        SELECT language_name FROM language WHERE language_name = #{languageName};
     </select>
 </mapper>
 

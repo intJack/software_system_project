@@ -21,4 +21,14 @@ public class TagServiceImpl implements TagService {
     public List<Long> findIdByTagAndLanguage(String tagName, String languageName) {
         return tagMapper.selectIdByTagAndLanguage(tagName,languageName);
     }
+
+    @Override
+    public String findTagNameByTagName(String tagName) {
+        return tagMapper.selectTagNameByTagName(tagName);
+    }
+
+    @Override
+    public void addTagName(String tagName) {
+        tagMapper.insertTagName(tagName);
+    }
 }

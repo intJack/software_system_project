@@ -23,18 +23,26 @@ public interface ResourceMapper {
 
     void updateResourceStatus(@Param("id") Long id, @Param("status") String status, @Param("reviewBy") Long reviewBy);
 
+
+    /**
+     * 找到指定(tagName,languageName)对应的id
+     */
+    Long findIdByTagNameAndLanguageName(@Param("tagName")String tagName,
+                                        @Param("languageName")String languageName);
+    /**
+     * 插入指定(tagName,languageName)
+     */
+    void insertTagNameAndLanguageName(@Param("tagName")String tagName,@Param("languageName")String languageName);
+
     /**
      * 修改指定id资源的tagLanguageId
      * @param tagLanguageId
      * @param id
      */
-//    void UpdateResourceByTagLanguageId(Long tagLanguageId,Long id);
+    void UpdateResourceByTagLanguageId(Long tagLanguageId,Long id);
 
-
-
-
-
-
+    void insertResource(@Param("tagLanguageId") Long tagLanguageId,
+                        @Param("resourceTitle") String resourceTitle);
 ////     插入待审核资源
 //    @Insert("INSERT INTO resources_temp(user_id, file_path, upload_time, status, review_time, review_by) " +
 //            "VALUES(#{userId}, #{filePath}, NOW(), '待审核', NULL, NULL)")

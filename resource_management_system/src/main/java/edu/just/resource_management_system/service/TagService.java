@@ -7,4 +7,6 @@ import java.util.List;
 public interface TagService {
     List<Tag>findAllTags();
     List<Long>findIdByTagAndLanguage(String tagName,String languageName);
+    String findTagNameByTagName(String tagName);
+    void addTagName(String tagName);
 }

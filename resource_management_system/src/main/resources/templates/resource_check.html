@@ -146,7 +146,7 @@
       <td th:text="${resource.languageName}"></td>
       <td th:text="${resource.tagName}"></td>
       <td>
-        <a th:href="@{'/approve-resource/' + ${resource.id}}">通过</a>
+        <a th:href="@{'/approve-resource/' + ${resource.id}+'/'+${resource.tagName}+'/'+${resource.languageName}+'/'+${resource.resourceTitle}}">通过</a>
         <a th:href="@{'/reject-resource/' + ${resource.id}}">拒绝</a>
       </td>
     </tr>

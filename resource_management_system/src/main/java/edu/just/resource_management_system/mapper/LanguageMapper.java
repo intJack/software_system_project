@@ -21,4 +21,13 @@ public interface LanguageMapper {
 
     List<Long> selectIdByTagAndLanguage(@Param("tagName") String tagName,
                                         @Param("languageName") String languageName);
+
+    /**
+     * 判断language表是否存在languageName
+     * @param languageName
+     * @return
+     */
+    String selectLanguageNameByLanguageName(String languageName);
+
+    void insertLanguageName(String languageName);
 }

@@ -3,7 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.just.resource_management_system.mapper.ResourceMapper">
-
+    <insert id="insertTagNameAndLanguageName">
+        INSERT INTO tag_language(tag_name,language_name)VALUES (#{tagName},#{languageName});
+    </insert>
+    <insert id="insertResource">
+        INSERT INTO resource(tag_language_id,resource_title)VALUES (#{tagLanguageId},#{resourceTitle});
+    </insert>
     <update id="UpdateResourceByTagLanguageId">
         UPDATE resource SET tag_language_id =#{tagLanguageId}  WHERE id = #{id}
     </update>
@@ -42,6 +47,10 @@
         FROM resources_temp
         WHERE  status = '待审核'
         ORDER BY upload_time;
+    </select>
+    <select id="findIdByTagNameAndLanguageName" resultType="java.lang.Long">
+        SELECT id FROM tag_language WHERE tag_name = #{tagName}
+                                      AND language_name = #{languageName};
     </select>
 </mapper>
 

@@ -13,10 +13,13 @@ public interface ResourceService {
                                                 String keyword);
 
 //    void saveTempResource(Resource resource);
-//
-//    void approveResource(Long id, Long reviewBy);
-//
+     void approveResource(Long id, Long reviewBy,String tagName,String languageName,String resourceTitle);
+
     void rejectResource(Long id, Long reviewBy);
 
     List<Resource> findAllResources();
+
+    Long findIdByTagNameAndLanguageName(String tagName,String languageName);
+
+
 }
