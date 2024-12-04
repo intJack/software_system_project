@@ -1,16 +1,16 @@
 package edu.just.resource_management_system.controller;
 
+import edu.just.resource_management_system.pojo.PasswordChangeRequest;
 import edu.just.resource_management_system.pojo.Resource;
 import edu.just.resource_management_system.pojo.User;
-import edu.just.resource_management_system.service.LanguageService;
-import edu.just.resource_management_system.service.ResourceService;
-import edu.just.resource_management_system.service.TagService;
-import edu.just.resource_management_system.service.UserService;
+import edu.just.resource_management_system.service.*;
 import edu.just.resource_management_system.util.MD5Util;
 import edu.just.resource_management_system.util.TokenUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +27,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private ResourceService resourceService;
+    @Autowired
+    private HttpSession httpSession;
 
     @PostMapping("/SignIn")
     public String SignIn(User user){
@@ -108,12 +110,36 @@ public class UserController {
         model.addAttribute("user_info",user);
         return "self_info";
     }
+
     @PostMapping("/updateuser")
-    @ResponseBody
-    public String updateUser(@RequestBody User user){
-//        System.out.println(user);
-        userService.modifyUserInfo(user);
-        return null;
+    public ResponseEntity<String> updateUser(@RequestBody User user) {
+        try {
+            userService.modifyUserInfo(user.getUserName(), user.getEmail(), user.getPhoneNumber(), user.getId());
+            return ResponseEntity.ok("更新成功！");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("更新失败，请重试！");
+        }
+    }
+    /**
+     * 用户修改密码
+     */
+    @PostMapping("/ChangePassword")
+    public ResponseEntity<Map<String,Object>> ChangePassword(@RequestBody PasswordChangeRequest passwordChangeRequest,
+                                                 HttpServletRequest request){
+        Long id = (Long) request.getSession().getAttribute("id");
+        String userName = (String) request.getSession().getAttribute("userName");
+        User user = userService.login(userName,MD5Util.encryptToMD5(passwordChangeRequest.getOldPassword()));
+        HashMap<String, Object> response = new HashMap<>();
+        if(user!=null){
+            userService.modifyUserPassword(MD5Util.encryptToMD5(passwordChangeRequest.getNewPassword()),id);
+            response.put("success",true);
+            response.put("message","密码修改成功");
+            return ResponseEntity.ok(response);
+        }else {
+            response.put("success", false);
+            response.put("message", "原密码输入错误");
+            return ResponseEntity.status(401).body(response);
+        }
     }
     /**
      * 用户实现对语言的查询 点击语言相关的资源 然后跳转到查询结果页
