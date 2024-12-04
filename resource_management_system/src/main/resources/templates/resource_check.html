@@ -118,22 +118,21 @@
     <thead>
     <tr>
       <th>资源标题</th>
-      <th>上传者</th>
-      <th>上传时间</th>
-      <th>状态</th>
+      <th>资源描述</th>
+      <th>语言</th>
+      <th>标签</th>
       <th>操作</th>
     </tr>
     </thead>
     <tbody>
-    <!-- 循环展示待审核资源 -->
-    <tr th:each="resource : ${pendingResources}">
-      <td th:text="${resource.resourceTitle}">资源标题</td>
-      <td th:text="${resource.user.userName}">上传者</td>
-      <td th:text="${#dates.format(resource.uploadTime, 'yyyy-MM-dd HH:mm')}">上传时间</td>
-      <td th:text="${resource.status}">状态</td>
+    <tr th:each="resource : ${allResources}">
+      <td th:text="${resource.resourceTitle}"></td>
+      <td th:text="${resource.resourceDescription}"></td>
+      <td th:text="${resource.languageName}"></td>
+      <td th:text="${resource.tagName}"></td>
       <td>
-        <a th:href="@{'/approve/' + ${resource.id}}">通过</a>
-        <a th:href="@{'/reject/' + ${resource.id}}">拒绝</a>
+        <a th:href="@{'/approve-resource/' + ${resource.id}}">通过</a>
+        <a th:href="@{'/reject-resource/' + ${resource.id}}">拒绝</a>
       </td>
     </tr>
     </tbody>

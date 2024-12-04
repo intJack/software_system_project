@@ -113,9 +113,8 @@
         <li><a th:href="@{/}">首页</a></li>
         <li><a href="#">论坛</a></li>
         <li><a href="#">关于</a></li>
-        <li th:if="${session.userName == null}"><a th:href="@{/managerlogin}">管理员登录</a></li>
-<!--        <li th:if="${session.userName == null}"><a th:href="@{/register}">注册</a></li>-->
-        <li th:if="${session.userName != null}"><a th:text="${session.userName}" href="#"></a></li>
+        <li th:if="${session.adminName == null}"><a th:href="@{/managerlogin}">管理员登录</a></li>
+        <li th:if="${session.adminName != null}"><a th:text="${session.adminName}" href="#"></a></li>
       </ul>
     </nav>
   </div>
@@ -135,7 +134,6 @@
     </tr>
     </thead>
     <tbody>
-    <!-- 循环展示登录历史记录 -->
     <tr th:each="user : ${allUsers}">
       <td th:if="${user.id != null}" th:text="${user.id}"></td> <!-- 序号 -->
 

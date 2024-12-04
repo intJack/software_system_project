@@ -63,11 +63,11 @@
 
 <div class="container">
     <h1>管理员登录界面</h1>
-    <form id="loginForm" th:action="@{/managerlogin}" method="post">
-        <label for="userName">用户名:</label>
-        <input type="text" id="userName" name="userName" required />
-        <label for="userPassword">密码:</label>
-        <input type="password" id="userPassword" name="userPassword" required />
+    <form id="loginForm" th:action="@{/login2}" method="post">
+        <label for="adminName">用户名:</label>
+        <input type="text" id="adminName" name="adminName" required />
+        <label for="adminPassword">密码:</label>
+        <input type="password" id="adminPassword" name="adminPassword" required />
         <button type="submit">登录</button>
         <button type="button"  class="backButton">返回</button>
         <p id ="error-message" th:text="${error}" style="color: red;"></p>
@@ -77,18 +77,18 @@
 <script>
     $('#loginForm').on('submit',function (e) {
         e.preventDefault();
-        let userName = $('#userName').val();
-        let userPassword = $('#userPassword').val();
+        let adminName = $('#adminName').val();
+        let adminPassword = $('#adminPassword').val();
         $('#error-message').text('');
         $.ajax({
-            url: '/login1',
+            url: '/login2',
             type: 'POST',
             data: {
-                userName: userName,
-                userPassword: userPassword
+                adminName: adminName,
+                adminPassword: adminPassword
             },
             success: function(response) {
-                window.location.href = '/home';
+                window.location.href = '/admin';
             },
             error: function(xhr) {
                 if (xhr.responseJSON && xhr.responseJSON.error) {

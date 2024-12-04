@@ -17,5 +17,7 @@ public class Resource {
     private String resourceTitle;
     private String resourceUrl;
     private String resourceDescription;
+    private String tagName;
+    private String languageName;
 
 }

@@ -38,10 +38,7 @@ public class PageController {
             return "password";
         }
 
-    @GetMapping("/resource_check")
-    public String resourcecheck() {
-        return "resource_check";
-    }
+
     @GetMapping("/manager_selfinfo")
     public String managerselfinfo() {
         return "manager_selfinfo";

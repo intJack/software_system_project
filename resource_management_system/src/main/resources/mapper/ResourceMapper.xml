@@ -3,7 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.just.resource_management_system.mapper.ResourceMapper">
-<!--查询前十条资源-->
+
+    <update id="UpdateResourceByTagLanguageId">
+        UPDATE resource SET tag_language_id =#{tagLanguageId}  WHERE id = #{id}
+    </update>
+    <update id="updateResourceStatus">
+        UPDATE resources_temp SET status =#{status},review_time = NOW(), review_by =#{reviewBy} WHERE id = #{id};
+    </update>
+    <!--查询前十条资源-->
     <select id="selectTop10Resources" resultType="edu.just.resource_management_system.pojo.Resource">
         SELECT r.id,r.resource_title,r.resource_url FROM resource as r
         <where>
@@ -29,6 +36,12 @@
                 AND resource_title LIKE '%${keyword}'('%',#{keyword},'%')
             </if>
         </where>
+    </select>
+    <select id="selectAllResources" resultType="edu.just.resource_management_system.pojo.Resource">
+        SELECT id,resource_title,tag_name,language_name,resource_description
+        FROM resources_temp
+        WHERE  status = '待审核'
+        ORDER BY upload_time;
     </select>
 </mapper>
 

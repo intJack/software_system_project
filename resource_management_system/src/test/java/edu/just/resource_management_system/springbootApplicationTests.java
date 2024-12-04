@@ -1,9 +1,6 @@
 package edu.just.resource_management_system;
 
-import edu.just.resource_management_system.mapper.CarouselMapper;
-import edu.just.resource_management_system.mapper.LanguageMapper;
-import edu.just.resource_management_system.mapper.TagMapper;
-import edu.just.resource_management_system.mapper.UserMapper;
+import edu.just.resource_management_system.mapper.*;
 import edu.just.resource_management_system.pojo.Admin;
 import edu.just.resource_management_system.pojo.User;
 import edu.just.resource_management_system.service.AdminService;
@@ -73,12 +70,19 @@ class springbootApplicationTests {
     @Test
     void testAdminMapper(){
 //        adminService.login("root","654321");
-        Admin admin = adminService.selectAdminById(1L);
-        assert (admin!=null);
-        admin.setAdminPassword(MD5Util.encryptToMD5("99875516"));
-        adminService.modifyAdminInfo(admin);
-//        Admin admin0 = new Admin("admin", "654");
+//        Admin admin = adminService.selectAdminById(1L);
+//        assert (admin!=null);
+//        admin.setAdminPassword(MD5Util.encryptToMD5("99875516"));
+//        adminService.modifyAdminInfo(admin);
+//        Admin admin0 = new Admin("root", "654");
+//        System.out.println(admin0.getAdminPassword());
 //        adminService.saveAdmin(admin0);
+        // 加密密码
+//        String encryptedPassword = MD5Util.encryptToMD5("654");
+        // 调用服务进行登录验证
+//        Admin admin = Admi("root","ab233b682ec355648e7891e66c54191b");
+        Admin admin = adminService.login("root", "ab233b682ec355648e7891e66c54191b");
+        System.out.println(admin);
     }
 
     @Autowired
@@ -104,6 +108,7 @@ class springbootApplicationTests {
     ResourceService resourceService;
     @Test
     void test01(){
+        resourceService.findAllResources().stream().forEach(System.out::println);
 //        resourceService.findResourcesByIdsAndKeyword(List.of(1L),"C++")
 //                .stream().forEach(System.out::println);
     }

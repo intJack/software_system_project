@@ -38,4 +38,9 @@ public class AdminServiceImpl implements AdminService {
     public void deleteUserById(Long id) {
         adminMapper.deleteUserById(id);
     }
+
+    @Override
+    public void approveResource(Long id) {
+
+    }
 }

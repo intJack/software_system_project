@@ -12,9 +12,11 @@ public interface ResourceService {
     List<Resource> findResourcesByIdsAndKeyword(String tagName,String languageName,
                                                 String keyword);
 
-void saveTempResource(Resource resource);
-
-    void approveResource(Long id, Long reviewBy);
-
+//    void saveTempResource(Resource resource);
+//
+//    void approveResource(Long id, Long reviewBy);
+//
     void rejectResource(Long id, Long reviewBy);
+
+    List<Resource> findAllResources();
 }
