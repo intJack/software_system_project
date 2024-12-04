@@ -33,4 +33,9 @@ public class AdminServiceImpl implements AdminService {
     public Admin selectAdminById(Long id) {
         return adminMapper.selectAdminById(id);
     }
+
+    @Override
+    public void deleteUserById(Long id) {
+        adminMapper.deleteUserById(id);
+    }
 }

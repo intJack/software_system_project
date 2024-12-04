@@ -7,4 +7,5 @@ public interface AdminService {
     void saveAdmin(Admin admin);
     void modifyAdminInfo(Admin admin);
     Admin selectAdminById(Long id);
+    void deleteUserById(Long id);
 }

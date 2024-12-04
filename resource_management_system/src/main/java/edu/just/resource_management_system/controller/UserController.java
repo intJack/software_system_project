@@ -38,7 +38,6 @@ public class UserController {
         return "home";
     }
 
-
     @PostMapping("/login1")
     public ResponseEntity<Map<String,Object>> login(@RequestParam("userName") String userName,
                                                     @RequestParam("userPassword") String password,

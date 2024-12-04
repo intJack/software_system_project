@@ -9,6 +9,9 @@
         SET admin_name = #{admin.adminName}, admin_password = #{admin.adminPassword}
         WHERE id = #{admin.id};
     </update>
+    <delete id="deleteUserById">
+        delete from wx_user where id = #{id};
+    </delete>
     <select id="login" resultType="edu.just.resource_management_system.pojo.Admin">
         SELECT * FROM root_admin WHERE admin_name =#{adminName} AND admin_password =#{adminPassword};
     </select>
