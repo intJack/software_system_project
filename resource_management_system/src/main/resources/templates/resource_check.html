@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>资源审核</title>
   <link rel="stylesheet" href="/css/HomePage.css">
-  <!-- 其他样式 -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    /* 样式代码与您提供的发布资源页面相同 */
+  </style>
 </head>
 <body>
 <div class="form-container">
   <h2>资源审核</h2>
-  <table>
+  <table id="resourcesTable">
     <thead>
     <tr>
       <th>资源标题</th>
@@ -20,76 +23,72 @@
       <th>操作</th>
     </tr>
     </thead>
-    <tbody id="resourcesTable">
+    <tbody>
     <!-- 资源项将通过JavaScript动态插入 -->
     </tbody>
   </table>
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // 假设有一个函数fetchResources()来获取待审核的资源列表
-    fetchResources();
-
-    function fetchResources() {
-      fetch('/审核接口URL') // 替换为实际的后端接口
-              .then(response => response.json())
-              .then(data => {
-                const resourcesTable = document.getElementById('resourcesTable');
-                resourcesTable.innerHTML = ''; // 清空表格
-                data.forEach(resource => {
-                  const row = resourcesTable.insertRow();
-                  row.insertCell().textContent = resource.resourceTitle;
-                  row.insertCell().textContent = resource.tagName;
-                  row.insertCell().textContent = resource.languageName;
-                  row.insertCell().textContent = resource.resourceDescription;
-                  const actionCell = row.insertCell();
-                  const approveButton = document.createElement('button');
-                  approveButton.textContent = '通过';
-                  approveButton.onclick = function() { approveResource(resource.id); };
-                  const rejectButton = document.createElement('button');
-                  rejectButton.textContent = '拒绝';
-                  rejectButton.onclick = function() { rejectResource(resource.id); };
-                  actionCell.appendChild(approveButton);
-                  actionCell.appendChild(rejectButton);
-                });
-              })
-              .catch(error => {
-                console.error('获取资源列表失败：', error);
-              });
+  $(document).ready(function() {
+    function fetchPendingResources() {
+      $.ajax({
+        url: '/pending-resources', // 后端提供的待审核资源接口
+        type: 'GET',
+        success: function(response) {
+          var resourcesTableBody = $('#resourcesTable tbody');
+          resourcesTableBody.empty(); // 清空表格
+          $.each(response, function(index, resource) {
+            var row = resourcesTableBody.append('<tr></tr>');
+            row.append('<td>' + resource.resourceTitle + '</td>');
+            row.append('<td>' + resource.tagName + '</td>');
+            row.append('<td>' + resource.languageName + '</td>');
+            row.append('<td>' + resource.resourceDescription + '</td>');
+            var actionTd = row.append('<td></td>');
+            var approveButton = $('<button>通过</button>').on('click', function() { approveResource(resource.id); });
+            var rejectButton = $('<button>拒绝</button>').on('click', function() { rejectResource(resource.id); });
+            actionTd.append(approveButton);
+            actionTd.append(rejectButton);
+          });
+        },
+        error: function() {
+          alert('加载待审核资源失败');
+        }
+      });
     }
 
     function approveResource(resourceId) {
-      fetch('/审核接口URL/approve/' + resourceId, { method: 'POST' })
-              .then(response => response.json())
-              .then(data => {
-                if (data.success) {
-                  alert('资源审核通过！');
-                  fetchResources(); // 重新加载资源列表
-                } else {
-                  alert('审核失败：' + data.message);
-                }
-              })
-              .catch(error => {
-                console.error('审核通过失败：', error);
-              });
+      $.ajax({
+        url: '/approve-resource/' + resourceId,
+        type: 'POST',
+        success: function() {
+          alert('资源审核通过');
+          fetchPendingResources(); // 重新加载待审核资源
+        },
+        error: function() {
+          alert('审核通过失败');
+        }
+      });
     }
 
-    function rejectResource(resourceId) {
-      fetch('/审核接口URL/reject/' + resourceId, { method: 'POST' })
-              .then(response => response.json())
-              .then(data => {
-                if (data.success) {
-                  alert('资源审核拒绝！');
-                  fetchResources(); // 重新加载资源列表
-                } else {
-                  alert('审核失败：' + data.message);
-                }
-              })
-              .catch(error => {
-                console.error('审核拒绝失败：', error);
-              });
+    function rejectResource(resourceId, reviewBy) {
+      $.ajax({
+        url: '/api/reject-resource/' + resourceId,
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({reviewBy: reviewBy}),
+        success: function() {
+          alert('资源审核拒绝');
+          fetchPendingResources(); // 重新加载待审核资源
+        },
+        error: function() {
+          alert('审核拒绝失败');
+        }
+      });
     }
+
+
+    fetchPendingResources(); // 初始化时加载待审核资源
   });
 </script>
 </body>

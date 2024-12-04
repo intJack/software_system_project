@@ -14,6 +14,21 @@ import java.util.List;
 public class ResourceServiceImpl implements ResourceService {
     @Autowired
     ResourceMapper resourceMapper;
+
+    @Override
+    public void saveTempResource(Resource resource) {
+        resourceMapper.insertTempResource(resource);
+    }
+
+    @Override
+    public void approveResource(Long id, Long reviewBy) {
+        resourceMapper.updateResourceStatus(id, "已通过", reviewBy);
+    }
+
+    @Override
+    public void rejectResource(Long id, Long reviewBy) {
+        resourceMapper.updateResourceStatus(id, "已拒绝", reviewBy);
+    }
     /**
      * tag 和 language 都是为了更精确更迅速定位到 资源
      * tagService和languageService 的方法 都应该 通过 ResourceService的实现类去调用
@@ -29,9 +44,6 @@ public class ResourceServiceImpl implements ResourceService {
         return resourceMapper.selectResourcesByIdsAndKeyword(ids,keyword);
     }
 
-//    @Override
-//    public void saveResource(Resource resource) {
-//        resourceMapper.insertResource(resource);
-//    }
+
 
 }
