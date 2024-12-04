@@ -30,6 +30,12 @@ public class AdminController {
         return "admin_management";
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
+
     @GetMapping("/user/{id}")
     public String deleteUser(@PathVariable("id") Long id){
         adminService.deleteUserById(id);

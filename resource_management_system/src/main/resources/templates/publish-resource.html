@@ -119,6 +119,7 @@
                 .then(data => {
                     if (data.success) {
                         alert('资源发布成功！');
+                        window.location.href= '/selfinfo';
                         // 这里可以添加成功后的逻辑，比如清空表单或跳转到其他页面
                     } else {
                         alert('资源发布失败：' + data.message);
