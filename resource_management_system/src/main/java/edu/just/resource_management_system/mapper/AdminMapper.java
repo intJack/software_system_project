@@ -20,8 +20,8 @@ public interface AdminMapper {
     Admin selectAdminById(Long id);
 
     /**
-     * 根据用户id 修改信息
-     * @param admin 修改过的用户
+     * 根据用户id 管理员
+     * @param admin 修改过的管理员
      */
     void ModifyAdminInfo(@Param("admin") Admin admin);
 
@@ -30,4 +30,6 @@ public interface AdminMapper {
      * @param admin
      */
     void attachAdmin(Admin admin);
+
+    void deleteUserById(Long id);
 }
