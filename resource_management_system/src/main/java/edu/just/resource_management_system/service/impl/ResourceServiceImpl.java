@@ -28,4 +28,10 @@ public class ResourceServiceImpl implements ResourceService {
         List<Long> ids = tagService.findIdByTagAndLanguage(tagName, languageName);
         return resourceMapper.selectResourcesByIdsAndKeyword(ids,keyword);
     }
+
+//    @Override
+//    public void saveResource(Resource resource) {
+//        resourceMapper.insertResource(resource);
+//    }
+
 }
