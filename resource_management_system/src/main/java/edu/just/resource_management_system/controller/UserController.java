@@ -1,8 +1,6 @@
 package edu.just.resource_management_system.controller;
 
-import edu.just.resource_management_system.pojo.PasswordChangeRequest;
-import edu.just.resource_management_system.pojo.Resource;
-import edu.just.resource_management_system.pojo.User;
+import edu.just.resource_management_system.pojo.*;
 import edu.just.resource_management_system.service.*;
 import edu.just.resource_management_system.util.MD5Util;
 import edu.just.resource_management_system.util.TokenUtil;
@@ -28,7 +26,9 @@ public class UserController {
     @Autowired
     private ResourceService resourceService;
     @Autowired
-    private HttpSession httpSession;
+    private LanguageService languageService;
+    @Autowired
+    private TagService tagService;
 
     @PostMapping("/SignIn")
     public String SignIn(User user){
@@ -89,10 +89,6 @@ public class UserController {
      * 跳转到search界面 往modelmap加入所有标签和语言
      * @return search.html
      */
-    @Autowired
-    TagService tagService;
-    @Autowired
-    LanguageService languageService;
     @GetMapping("/search")
     public String searchPage(ModelMap modelMap) {
         modelMap.addAttribute("allTags",tagService.findAllTags());
@@ -151,12 +147,17 @@ public class UserController {
     }
 
     /**
+     * 跳转之前存储标签信息和语言信息
      * 跳转到发布资源页面
-     * @return 发布资源页面的视图名称
+     * @return 发布资源 页面的视图名称
      */
     @GetMapping("/publish-resource")
-    public String publishResourcePage() {
-        return "publish-resource"; // 假设你的发布资源页面的HTML文件名为 publish-resource.html
+    public String publishResourcePage(Model model) {
+        List<Tag> allTags = tagService.findAllTags();
+        model.addAttribute("allTags",allTags);
+        List<Language> allLanguages = languageService.findAllLanguages();
+        model.addAttribute("allLanguages",allLanguages);
+        return "publish-resource";
     }
 
 //    /**

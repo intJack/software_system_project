@@ -31,5 +31,9 @@ public interface AdminMapper {
      */
     void attachAdmin(Admin admin);
 
+    /**
+     * 删除指定用户
+     * @param id 用户id
+     */
     void deleteUserById(Long id);
 }

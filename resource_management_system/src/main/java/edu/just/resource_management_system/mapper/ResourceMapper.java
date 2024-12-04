@@ -22,4 +22,6 @@ public interface ResourceMapper {
 //            " VALUES (#{id}, #{resourceTitle}, #{resourceUrl}, #{resourceDescription})")
 //    @Options(useGeneratedKeys = true, keyProperty = "id")
 //    void insertResource(Resource resource);
+
+
 }

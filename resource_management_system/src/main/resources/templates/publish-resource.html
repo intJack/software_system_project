@@ -73,15 +73,13 @@
         <label for="tag">标签：</label>
         <select id="tag" name="tagName">
             <option value="">请选择标签</option>
-            <!-- 假设您有一个名为 allTags 的变量，其中包含所有标签 -->
-            <option th:each="tag : ${allTags}" th:text="${tag.tagName}" th:value="${tag.id}"></option>
+            <option th:each="tag : ${allTags}" th:text="${tag.tagName}"></option>
         </select>
 
         <label for="language">开发语言：</label>
         <select id="language" name="languageName">
             <option value="">请选择语言</option>
-            <!-- 假设您有一个名为 allLanguages 的变量，其中包含所有语言 -->
-            <option th:each="language : ${allLanguages}" th:text="${language.languageName}" th:value="${language.id}"></option>
+            <option th:each="language : ${allLanguages}" th:text="${language.languageName}"></option>
         </select>
 
         <label for="description">资源描述：</label>
