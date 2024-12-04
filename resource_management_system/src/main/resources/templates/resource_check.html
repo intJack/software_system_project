@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>资源审核</title>
+  <link rel="stylesheet" href="/css/HomePage.css">
+  <!-- 其他样式 -->
+</head>
+<body>
+<div class="form-container">
+  <h2>资源审核</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>资源标题</th>
+      <th>标签</th>
+      <th>开发语言</th>
+      <th>资源描述</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody id="resourcesTable">
+    <!-- 资源项将通过JavaScript动态插入 -->
+    </tbody>
+  </table>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // 假设有一个函数fetchResources()来获取待审核的资源列表
+    fetchResources();
+
+    function fetchResources() {
+      fetch('/审核接口URL') // 替换为实际的后端接口
+              .then(response => response.json())
+              .then(data => {
+                const resourcesTable = document.getElementById('resourcesTable');
+                resourcesTable.innerHTML = ''; // 清空表格
+                data.forEach(resource => {
+                  const row = resourcesTable.insertRow();
+                  row.insertCell().textContent = resource.resourceTitle;
+                  row.insertCell().textContent = resource.tagName;
+                  row.insertCell().textContent = resource.languageName;
+                  row.insertCell().textContent = resource.resourceDescription;
+                  const actionCell = row.insertCell();
+                  const approveButton = document.createElement('button');
+                  approveButton.textContent = '通过';
+                  approveButton.onclick = function() { approveResource(resource.id); };
+                  const rejectButton = document.createElement('button');
+                  rejectButton.textContent = '拒绝';
+                  rejectButton.onclick = function() { rejectResource(resource.id); };
+                  actionCell.appendChild(approveButton);
+                  actionCell.appendChild(rejectButton);
+                });
+              })
+              .catch(error => {
+                console.error('获取资源列表失败：', error);
+              });
+    }
+
+    function approveResource(resourceId) {
+      fetch('/审核接口URL/approve/' + resourceId, { method: 'POST' })
+              .then(response => response.json())
+              .then(data => {
+                if (data.success) {
+                  alert('资源审核通过！');
+                  fetchResources(); // 重新加载资源列表
+                } else {
+                  alert('审核失败：' + data.message);
+                }
+              })
+              .catch(error => {
+                console.error('审核通过失败：', error);
+              });
+    }
+
+    function rejectResource(resourceId) {
+      fetch('/审核接口URL/reject/' + resourceId, { method: 'POST' })
+              .then(response => response.json())
+              .then(data => {
+                if (data.success) {
+                  alert('资源审核拒绝！');
+                  fetchResources(); // 重新加载资源列表
+                } else {
+                  alert('审核失败：' + data.message);
+                }
+              })
+              .catch(error => {
+                console.error('审核拒绝失败：', error);
+              });
+    }
+  });
+</script>
+</body>
+</html>

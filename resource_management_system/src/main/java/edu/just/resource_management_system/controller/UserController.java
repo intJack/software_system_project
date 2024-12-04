@@ -178,36 +178,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/submit-resource")
-    public ResponseEntity<Map<String, Object>> submitResource(@RequestParam String resourceTitle,
-                                                              @RequestParam String description) {
-        Map<String, Object> response = new HashMap<>();
-        try {
-            // 处理资源发布逻辑
-            // 如果成功
-            response.put("success", true);
-            response.put("message", "资源发布成功！");
-        } catch (Exception e) {
-            response.put("success", false);
-            response.put("message", "资源发布失败：" + e.getMessage());
-        }
-        return ResponseEntity.ok(response);
-    }
 
-//    /**
-//     * 提交发布的资源
-//     * @param resource 资源对象
-//     * @return 提交后的响应
-//     */
-//    @PostMapping("/submit-resource")
-//    public ResponseEntity<String> submitResource(@RequestBody Resource resource) {
-//        try {
-//            // 假设资源提交后需要保存到数据库
-//            resourceService.saveResource(resource);
-//            return ResponseEntity.ok("资源发布成功！");
-//        } catch (Exception e) {
-//            // 处理异常情况，例如保存失败
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("资源发布失败：" + e.getMessage());
-//        }
-//    }
+
+
 }
