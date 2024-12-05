@@ -38,7 +38,7 @@
                 </foreach>
             </if>
             <if test="keyword != '' and keyword != null">
-                AND resource_title LIKE '%${keyword}'('%',#{keyword},'%')
+                AND resource_title LIKE '%${keyword}%'
             </if>
         </where>
     </select>

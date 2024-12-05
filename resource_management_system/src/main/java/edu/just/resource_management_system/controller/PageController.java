@@ -38,7 +38,6 @@ public class PageController {
             return "password";
         }
 
-
     @GetMapping("/manager_selfinfo")
     public String managerselfinfo() {
         return "manager_selfinfo";
