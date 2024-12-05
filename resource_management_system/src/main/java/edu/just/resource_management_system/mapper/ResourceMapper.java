@@ -41,8 +41,8 @@ public interface ResourceMapper {
      */
     void UpdateResourceByTagLanguageId(Long tagLanguageId,Long id);
 
-    void insertResource(@Param("tagLanguageId") Long tagLanguageId,
-                        @Param("resourceTitle") String resourceTitle);
+    void insertResource(@Param("tagLanguageId")Long tagLanguageId,
+                        @Param("resourceTitle")String resourceTitle);
 ////     插入待审核资源
 //    @Insert("INSERT INTO resources_temp(user_id, file_path, upload_time, status, review_time, review_by) " +
 //            "VALUES(#{userId}, #{filePath}, NOW(), '待审核', NULL, NULL)")

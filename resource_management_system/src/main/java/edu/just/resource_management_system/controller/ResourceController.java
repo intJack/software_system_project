@@ -1,9 +1,7 @@
 package edu.just.resource_management_system.controller;
 
-import edu.just.resource_management_system.pojo.Resource;
 import edu.just.resource_management_system.service.ResourceService;
 import jakarta.servlet.http.HttpServletRequest;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,15 +28,14 @@ public class ResourceController {
     }
     @GetMapping("/reject-resource/{id}")
     public ResponseEntity<String> rejectResource(@PathVariable("id") Long id, HttpServletRequest request) {
-        System.out.println(id);
-        Long reviewBy = (Long) request.getSession().getAttribute("id");
-        resourceService.rejectResource(id, reviewBy);
-        return ResponseEntity.ok("Resource rejected successfully");
+            Long reviewBy = (Long) request.getSession().getAttribute("id");
+            resourceService.rejectResource(id, reviewBy);
+            return ResponseEntity.ok("资源不通过审核");
     }
 
     @GetMapping("/approve-resource/{id}/{tagName}/{languageName}/{resourceTitle}")
     public ResponseEntity<String> approveResource(@PathVariable("id") Long id,@PathVariable("tagName")String tagName,
-                                                  @Param("languageName")String languageName,@Param("resourceTitle")String resourceTitle,
+                                                  @PathVariable("languageName")String languageName,@PathVariable("resourceTitle")String resourceTitle,
                                                               HttpServletRequest request) {
         Long reviewBy = (Long) request.getSession().getAttribute("id");
 

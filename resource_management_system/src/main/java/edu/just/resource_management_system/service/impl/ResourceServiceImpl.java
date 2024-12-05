@@ -43,14 +43,12 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public void approveResource(Long id, Long reviewBy,String tagName,String languageName,String resourceTitle) {
-        System.out.println(languageName);
         resourceMapper.updateResourceStatus(id, "已通过", reviewBy);
         /**
          * 由于数据库的复杂性，插入资源相当麻烦需要进行一系列操作
          * 首先在tag_language表 查询有没有(tagName,languageName)这个组合的id
          */
         Long ids = findIdByTagNameAndLanguageName(tagName, languageName);
-        System.out.println(ids);
         /**
          * ids != null 说明存在(tagName,languageName) 无需在tag表和language表还有tag_language表 添加新的tagName和languageName
          * id == null 说明出现新的tagName或者languageName 分别去这个表 到底是tagName 还是languageName 新的？
@@ -63,7 +61,6 @@ public class ResourceServiceImpl implements ResourceService {
                 tagService.addTagName(tagName);
             }
             String languageName1 = languageMapper.selectLanguageNameByLanguageName(languageName);
-            System.out.println(languageName);
             if (languageName1 == null){
                 languageService.addLanguageName(languageName);
             }

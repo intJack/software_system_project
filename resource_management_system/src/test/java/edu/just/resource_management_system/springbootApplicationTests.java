@@ -124,6 +124,7 @@ class springbootApplicationTests {
 //        resourceMapper.insertTagNameAndLanguageName("php","Chinese");
 //        Long id = resourceMapper.findIdByTagNameAndLanguageName("php", "Chinese");
 //        System.out.println(id);
+        resourceMapper.insertResource(3L,"Hello算法");
     }
     @Autowired
     TagService tagService;
