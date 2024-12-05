@@ -91,7 +91,7 @@
       color: #c9c9c9;
     }
     button {
-      width: 100%;
+      width: 25%;
       padding: 10px;
       background-color: #593a21; /* Light blue button */
       color: white;
@@ -102,6 +102,13 @@
     }
     button:hover {
       background-color: #593a21; /* Darker blue on hover */
+    }
+    .button-container {
+      display: flex;
+      justify-content: end; /* 水平居中 */
+      align-items: center; /* 垂直居中 */
+      height: 100px; /* 根据需要设置高度 */
+      margin-top: 20px; /* 根据需要设置上边距 */
     }
   </style>
 </head>
@@ -146,17 +153,40 @@
       <td th:text="${resource.languageName}"></td>
       <td th:text="${resource.tagName}"></td>
       <td>
-        <a th:href="@{'/approve-resource/' + ${resource.id}+'/'+${resource.tagName}+'/'+${resource.languageName}+'/'+${resource.resourceTitle}}">通过</a>
-        <a th:href="@{'/reject-resource/' + ${resource.id}}">拒绝</a>
+        <a th:href="@{'/approve-resource/' + ${resource.id}+'/'+${resource.tagName}+'/'+${resource.languageName}+'/'+${resource.resourceTitle}}"onclick="rejectResource(${resource.id})">通过</a >
+        <a th:href="@{'/reject-resource/' + ${resource.id}}" onclick="rejectResource(${resource.id})">拒绝</a >
+
+
+
+      </td>
       </td>
     </tr>
     </tbody>
   </table>
-  <button type="button"  class="backButton">返回</button>
+
+  <div class="button-container">
+    <button type="button" class="backButton">返回</button>
+  </div>
 </div>
 <script>
-  // 为返回按钮添加点击事件
-  $('.backButton').on('click', function () {
+
+    // 定义拒绝资源的函数
+    function rejectResource(resourceId) {
+    $.ajax({
+      url: '/reject-resource/' + resourceId,  // 发送请求到后端
+      type: 'GET',
+      success: function (response) {
+        // 如果操作成功，刷新页面
+        window.location.reload();
+      },
+      error: function (xhr, status, error) {
+        alert("操作失败，请稍后重试！");
+      }
+    });
+  }
+
+    // 为返回按钮添加点击事件
+    $('.backButton').on('click', function () {
     window.history.back(); // 返回上一个页面
   });
 

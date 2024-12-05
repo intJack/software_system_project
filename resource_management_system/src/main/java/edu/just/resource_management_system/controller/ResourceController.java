@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+
 
 @Controller
 public class ResourceController {
@@ -27,21 +29,30 @@ public class ResourceController {
         return "resource_check";
     }
     @GetMapping("/reject-resource/{id}")
-    public ResponseEntity<String> rejectResource(@PathVariable("id") Long id, HttpServletRequest request) {
-            Long reviewBy = (Long) request.getSession().getAttribute("id");
-            resourceService.rejectResource(id, reviewBy);
-            return ResponseEntity.ok("资源不通过审核");
+    public String rejectResource(@PathVariable("id") Long id, HttpServletRequest request) {
+        Long reviewBy = (Long) request.getSession().getAttribute("id");
+        resourceService.rejectResource(id, reviewBy);
+        return "redirect:/resource_check"; // 这里是重新加载 resource_check 页面
     }
+//    @GetMapping("/reject-resource/{id}")
+//    public ResponseEntity<String> rejectResource(@PathVariable("id") Long id, HttpServletRequest request) {
+//            Long reviewBy = (Long) request.getSession().getAttribute("id");
+//            resourceService.rejectResource(id, reviewBy);
+//            return ResponseEntity.ok("资源不通过审核");
+////        return ResponseEntity.ok().headers(headers -> headers.setLocation(URI.create("/resource_check"))).body("资源不通过审核");
+////
+////
+//    }
 
     @GetMapping("/approve-resource/{id}/{tagName}/{languageName}/{resourceTitle}")
-    public ResponseEntity<String> approveResource(@PathVariable("id") Long id,@PathVariable("tagName")String tagName,
+    public String approveResource(@PathVariable("id") Long id,@PathVariable("tagName")String tagName,
                                                   @PathVariable("languageName")String languageName,@PathVariable("resourceTitle")String resourceTitle,
                                                               HttpServletRequest request) {
         Long reviewBy = (Long) request.getSession().getAttribute("id");
 
         resourceService.approveResource(id, reviewBy,tagName,languageName,resourceTitle);
+        return "redirect:/resource_check"; // 这里是重新加载 resource_check 页面
 
-        return ResponseEntity.ok("Resource approved successfully");
     }
 
 
