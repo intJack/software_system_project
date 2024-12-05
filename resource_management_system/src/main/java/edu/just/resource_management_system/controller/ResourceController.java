@@ -33,6 +33,7 @@ public class ResourceController {
             return ResponseEntity.ok("资源不通过审核");
     }
 
+
     @GetMapping("/approve-resource/{id}/{tagName}/{languageName}/{resourceTitle}")
     public ResponseEntity<String> approveResource(@PathVariable("id") Long id,@PathVariable("tagName")String tagName,
                                                   @PathVariable("languageName")String languageName,@PathVariable("resourceTitle")String resourceTitle,

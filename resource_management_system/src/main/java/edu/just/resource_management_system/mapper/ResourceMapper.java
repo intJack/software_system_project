@@ -43,7 +43,7 @@ public interface ResourceMapper {
 
     void insertResource(@Param("tagLanguageId")Long tagLanguageId,
                         @Param("resourceTitle")String resourceTitle);
-////     插入待审核资源
+//     插入待审核资源
 //    @Insert("INSERT INTO resources_temp(user_id, file_path, upload_time, status, review_time, review_by) " +
 //            "VALUES(#{userId}, #{filePath}, NOW(), '待审核', NULL, NULL)")
 //    @Options(useGeneratedKeys = true, keyProperty = "id")
@@ -53,7 +53,7 @@ public interface ResourceMapper {
 //            " VALUES (#{id}, #{resourceTitle}, #{resourceUrl}, #{resourceDescription})")
 //    @Options(useGeneratedKeys = true, keyProperty = "id")
 //    void insertResource(Resource resource);
-//
+
 
 
 }

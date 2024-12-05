@@ -27,23 +27,23 @@
             opacity: 1; /* 鼠标悬停时透明度为1（完全不透明） */
         }
     </style>
-    <script>
-        setInterval(test,2000);//切换时间间隔
-        var array = [];
-        var index=0;
-        var array = ["/image1.png","/image2.png","/image3.png"];
-        function test(){
-            var myimage = document.getElementById("image");
-            if(index === array.length - 1)
-            {
-                index = 0 ;
-            }
-            else{
-                index++;
-            }
-            myimage.src = array[index];
-        }
-    </script>
+<!--    <script>-->
+<!--        setInterval(test,2000);//切换时间间隔-->
+<!--        var array = [];-->
+<!--        var index=0;-->
+<!--        var array = ["/image1.png","/image2.png","/image3.png"];-->
+<!--        function test(){-->
+<!--            var myimage = document.getElementById("image");-->
+<!--            if(index === array.length - 1)-->
+<!--            {-->
+<!--                index = 0 ;-->
+<!--            }-->
+<!--            else{-->
+<!--                index++;-->
+<!--            }-->
+<!--            myimage.src = array[index];-->
+<!--        }-->
+<!--    </script>-->
 </head>
 <body>
 <!-- 顶部导航栏 -->
@@ -87,7 +87,6 @@
             </article>
 
 
-<!--有问题-->
             <article class="post">
                 <h2><a th:href="@{/details}">最新帖子</a></h2>
                 <a class="read-more" th:href="@{/details}">查看详情&gt;</a>
@@ -100,6 +99,36 @@
 <footer>
     <p>&copy; 2024资源管理系统 - 保留所有权利</p>
 </footer>
+<script>
+    var interval; // 用于存储setInterval的返回值，以便后续清除
+    var array = ["/image1.png", "/image2.png", "/image3.png"];
+    var index = 0;
 
+    function test() {
+        var myimage = document.getElementById("image");
+        if (index === array.length - 1) {
+            index = 0;
+        } else {
+            index++;
+        }
+        myimage.src = array[index];
+    }
+
+    // 启动轮播
+    interval = setInterval(test, 2000);
+
+    // 获取图片元素
+    var myimage = document.getElementById("image");
+
+    // 鼠标悬停时停止轮播
+    myimage.onmouseover = function() {
+        clearInterval(interval);
+    };
+
+    // 鼠标离开时恢复轮播
+    myimage.onmouseout = function() {
+        interval = setInterval(test, 2000); // 重新设置轮播
+    };
+</script>
 </body>
 </html>
