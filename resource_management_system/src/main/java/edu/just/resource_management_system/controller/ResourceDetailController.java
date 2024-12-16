@@ -22,7 +22,7 @@ public class ResourceDetailController {
         try {
             // 生成 txt 文件
             String fileName = resourceRequest.getResourceTitle().replaceAll("\\s+", "_") + ".txt";
-            String filePath = "/resources/" + fileName;
+            String filePath = "resources/" + fileName;
             File file = new File(filePath);
 
             // 确保文件夹存在
