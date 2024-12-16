@@ -15,19 +15,22 @@
     <update id="updateResourceStatus">
         UPDATE resources_temp SET status =#{status},review_time = NOW(), review_by =#{reviewBy} WHERE id = #{id};
     </update>
-    <!--查询前十条资源-->
+    <!-- 查询前十条资源 -->
     <select id="selectTop10Resources" resultType="edu.just.resource_management_system.pojo.Resource">
-        SELECT r.id,r.resource_title,r.resource_url FROM resource as r
+        SELECT r.id, r.resource_title, r.resource_url, r.created_at
+        FROM resource AS r
         <where>
-            <if test="ids != null">
-                r.tag_language_id in
+            <if test="ids != null and ids.size > 0">
+                r.tag_language_id IN
                 <foreach collection="ids" item="id" open="(" separator="," close=")">
                     #{id}
                 </foreach>
             </if>
         </where>
+        ORDER BY r.created_at DESC
         LIMIT 10
     </select>
+
     <select id="selectResourcesByIdsAndKeyword" resultType="edu.just.resource_management_system.pojo.Resource">
         SELECT r.id,r.resource_title,r.resource_url FROM resource as r
         <where>
@@ -52,5 +55,18 @@
         SELECT id FROM tag_language WHERE tag_name = #{tagName}
                                       AND language_name = #{languageName};
     </select>
+    <!-- 插入资源 -->
+    <insert id="insertResource2" parameterType="edu.just.resource_management_system.pojo.Resource">
+        INSERT INTO resource (tag_language_id, resource_title, resource_url, resource_description)
+        VALUES (#{tagLanguageId}, #{resourceTitle}, #{resourceUrl}, #{resourceDescription});
+    </insert>
+
+    <select id="findTagLanguageId" resultType="int">
+        SELECT COALESCE(id, 0)
+        FROM tag_language
+        WHERE tag_name = #{tagName} AND language_name = #{languageName}
+            LIMIT 1
+    </select>
+
 </mapper>
 

@@ -95,6 +95,19 @@ public class UserController {
         return "search";
     }
     /**
+     * 跳转到最新信息页面
+     * 根据数据库里的 resource 表的 create_at 字段，显示前 10 条数据
+     * @param modelMap
+     * @return latest.html
+     */
+    @GetMapping("/latest")
+    public String latestPage(@RequestParam(value = "ids", required = false) List<Integer> ids, ModelMap modelMap) {
+        List<Resource> latestResources = resourceService.findTop10ByOrderByCreateAtDesc(ids);
+        modelMap.addAttribute("latestResources", latestResources);
+        return "latest";
+    }
+
+    /**
      * 用户跳转到个人信息页面
      */
     @GetMapping("/selfinfo")

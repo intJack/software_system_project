@@ -21,5 +21,7 @@ public interface ResourceService {
 
     Long findIdByTagNameAndLanguageName(String tagName,String languageName);
 
-
+    List<Resource> findTop10ByOrderByCreateAtDesc(List<Integer> ids);
+    void saveResource(Resource resource);
+    int getTagLanguageId(String tagName, String languageName);
 }

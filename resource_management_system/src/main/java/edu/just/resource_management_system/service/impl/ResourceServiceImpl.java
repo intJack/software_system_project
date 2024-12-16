@@ -100,6 +100,22 @@ public class ResourceServiceImpl implements ResourceService {
         return resourceMapper.selectResourcesByIdsAndKeyword(ids,keyword);
     }
 
+    /**
+     * 查询最新的前 10 条资源
+     * @param ids 可选的标签或语言 ID 列表
+     * @return 资源列表
+     */
+    public List<Resource> findTop10ByOrderByCreateAtDesc(List<Integer> ids) {
+        return resourceMapper.selectTop10Resources(ids);
+    }
 
+
+    public int getTagLanguageId(String tagName, String languageName) {
+        return resourceMapper.findTagLanguageId(tagName, languageName);
+    }
+
+    public void saveResource(Resource resource) {
+        resourceMapper.insertResource2(resource);
+    }
 
 }

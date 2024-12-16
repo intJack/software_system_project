@@ -67,74 +67,78 @@
 <body>
 <div class="form-container">
     <h2>发布资源</h2>
-    <form th:action="@{/submit-resource}" method="POST">
+    <form id="resourceForm" method="POST">
         <label for="resourceTitle">资源标题：</label>
         <input type="text" id="resourceTitle" name="resourceTitle" required>
 
         <label for="tag">标签：</label>
-        <select id="tag" name="tagName">
+        <select id="tag" name="tagName" required>
             <option value="">请选择标签</option>
             <option th:each="tag : ${allTags}" th:text="${tag.tagName}"></option>
         </select>
 
         <label for="language">语言：</label>
-        <select id="language" name="languageName">
+        <select id="language" name="languageName" required>
             <option value="">请选择语言</option>
             <option th:each="language : ${allLanguages}" th:text="${language.languageName}"></option>
         </select>
 
         <label for="description">资源描述：</label>
         <textarea id="description" name="resourceDescription" rows="4" required></textarea>
-        <button type="submit">发布资源</button>
-<!--        <button type="button"  class="backButton">返回</button>-->
 
+        <button type="submit">发布资源</button>
     </form>
 </div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const form = document.querySelector('form');
-        const submitButton = document.querySelector('button[type="submit"]');
+        const form = document.getElementById('resourceForm');
 
-        form.addEventListener('submit', function (event) {
-            event.preventDefault(); // 阻止表单的默认提交行为
+        form.addEventListener('submit', async function (event) {
+            event.preventDefault(); // 阻止默认提交
 
-            // 检查必填字段是否已填写
-            const resourceTitle = document.getElementById('resourceTitle').value;
-            const description = document.getElementById('description').value;
+            // 获取表单内容
+            const resourceTitle = document.getElementById('resourceTitle').value.trim();
+            const tagName = document.getElementById('tag').value.trim();
+            const languageName = document.getElementById('language').value.trim();
+            const resourceDescription = document.getElementById('description').value.trim();
 
-            if (!resourceTitle || !description) {
+            // 检查必填项
+            if (!resourceTitle || !tagName || !languageName || !resourceDescription) {
                 alert('请填写所有必填字段！');
                 return;
             }
 
-            // 构建FormData对象，用于AJAX请求
-            const formData = new FormData(form);
-
-            // 发送AJAX请求到服务器
-            fetch('/submit-resource', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('资源发布成功！');
-                        window.location.href= '/selfinfo';
-                        // 这里可以添加成功后的逻辑，比如清空表单或跳转到其他页面
-                    } else {
-                        alert('资源发布失败：' + data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('提交过程中发生错误：', error);
-                    alert('提交过程中发生错误，请稍后再试。');
+            // 发送请求
+            try {
+                const response = await fetch('/resources/submit1', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        resourceTitle,
+                        tagName,
+                        languageName,
+                        resourceDescription
+                    })
                 });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('提交成功', data);
+                    alert('资源发布成功！');
+                    form.reset();
+                } else {
+                    console.error('提交失败', response.statusText);
+                    alert('资源发布失败，请稍后重试。');
+                }
+            } catch (error) {
+                console.error('请求失败', error);
+                alert('网络错误，请检查您的连接。');
+            }
         });
     });
-    // 为返回按钮添加点击事件
-    $('.backButton').on('click', function () {
-        window.history.back(); // 返回上一个页面
-    });
+
 </script>
+
 </body>
 </html>

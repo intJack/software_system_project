@@ -76,6 +76,12 @@
                 <img src = "/image1.png" width="900" height = "560" id="image">
             </div>
 
+
+            <article class="post">
+                <h2><a th:href="@{/latest}">最新帖子</a></h2>
+                <a class="read-more" th:href="@{/latest}">查看详情&gt;</a>
+            </article>
+
             <article class="post">
                 <h2><a th:href="@{/search}">资源查询</a></h2>
                 <a class="read-more" th:href="@{/search}">进行查询&gt;</a>
@@ -87,10 +93,6 @@
             </article>
 
 
-            <article class="post">
-                <h2><a th:href="@{/details}">最新帖子</a></h2>
-                <a class="read-more" th:href="@{/details}">查看详情&gt;</a>
-            </article>
         </div>
     </div>
 </main>
