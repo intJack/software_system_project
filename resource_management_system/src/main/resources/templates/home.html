@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="/css/HomePage.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+        /* 顶部导航栏 */
+        header {
+            background-color: #2770b8;
+            color: white;
+            padding: 10px 0;
+        }
+
         body{
             background-image: url("/background2.png");
             background-size: cover;
@@ -14,8 +21,6 @@
             background-repeat: no-repeat;
             margin: 0;
             padding: 0;
-            height: 100vh;
-
             height: 100vh;
         }
         .post {
@@ -55,8 +60,8 @@
         <nav>
             <ul>
                 <li><a th:href="@{/}">首页</a></li>
-                <li><a href="#">论坛</a></li>
-                <li><a href="#">关于</a></li>
+                <li><a th:href="@{/forum}">论坛</a></li>
+                <li><a th:href="@{/aboutus}">关于</a></li>
                 <li th:if="${session.userName == null}"><a th:href="@{/login}">用户登录</a></li>
                 <li th:if="${session.userName == null}"><a th:href="@{/managerlogin}">管理员登录</a></li>
                 <li th:if="${session.userName == null}"><a th:href="@{/register}">注册</a></li>
@@ -76,12 +81,6 @@
                 <img src = "/image1.png" width="900" height = "560" id="image">
             </div>
 
-
-            <article class="post">
-                <h2><a th:href="@{/latest}">最新帖子</a></h2>
-                <a class="read-more" th:href="@{/latest}">查看详情&gt;</a>
-            </article>
-
             <article class="post">
                 <h2><a th:href="@{/search}">资源查询</a></h2>
                 <a class="read-more" th:href="@{/search}">进行查询&gt;</a>
@@ -93,6 +92,10 @@
             </article>
 
 
+            <article class="post">
+                <h2><a th:href="@{/forum}">最新帖子</a></h2>
+                <a class="read-more" th:href="@{/forum}">查看详情&gt;</a>
+            </article>
         </div>
     </div>
 </main>
