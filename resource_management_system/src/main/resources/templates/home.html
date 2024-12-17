@@ -31,6 +31,11 @@
         .post:hover {
             opacity: 1; /* 鼠标悬停时透明度为1（完全不透明） */
         }
+
+        .navbar .tit a:hover {
+            text-decoration: underline;
+        }
+
     </style>
 <!--    <script>-->
 <!--        setInterval(test,2000);//切换时间间隔-->
@@ -57,9 +62,9 @@
         <div class="logo">
             <a href="@{/}">资源管理系统</a>
         </div>
-        <nav>
+        <nav class="tit">
             <ul>
-                <li><a th:href="@{/}">首页</a></li>
+                <li><a th:href="@{/}" style="">首页</a></li>
                 <li><a th:href="@{/forum}">论坛</a></li>
                 <li><a th:href="@{/aboutus}">关于</a></li>
                 <li th:if="${session.userName == null}"><a th:href="@{/login}">用户登录</a></li>

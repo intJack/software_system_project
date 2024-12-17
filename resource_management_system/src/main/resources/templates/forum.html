@@ -61,11 +61,6 @@
       font-size: 16px;
     }
 
-    .navbar nav a:hover {
-      color: #ffcc00; /* 鼠标悬停时变为金色 */
-    }
-
-
     /* Main Layout */
     main {
       width: 80%;
@@ -98,6 +93,9 @@
       font-size: 14px;
       color: #666;
       margin: 10px 0;
+    }
+    .navbar .tit a:hover {
+      text-decoration: underline;
     }
 
     /* Right Sidebar */
@@ -149,7 +147,7 @@
     <div class="logo">
       <a href="@{/}">资源管理系统</a>
     </div>
-    <nav>
+    <nav class="tit">
       <ul>
         <li><a th:href="@{/}">首页</a></li>
         <a th:href="@{/forum}">论坛</a></li>
