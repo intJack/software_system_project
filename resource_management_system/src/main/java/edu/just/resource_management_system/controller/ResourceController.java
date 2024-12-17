@@ -60,39 +60,39 @@ public class ResourceController {
     }
 
 
-    @PostMapping
-    public ResponseEntity<Map<String, Object>> submitResourceDetail(@RequestBody Map<String, String> requestData) {
-        Map<String, Object> response = new HashMap<>();
-        try {
-            String resourceTitle = requestData.get("resourceTitle");
-            String tagName = requestData.get("tagName");
-            String languageName = requestData.get("languageName");
-            String details = requestData.get("details");
-
-            // 定义文件路径和文件名
-            String filePath = "resources/" + resourceTitle + ".txt";
-            File file = new File(filePath);
-
-            // 确保目录存在
-            file.getParentFile().mkdirs();
-
-            // 写入文件
-            try (FileWriter writer = new FileWriter(file)) {
-                writer.write("资源标题: " + resourceTitle + "\n");
-                writer.write("标签: " + tagName + "\n");
-                writer.write("语言: " + languageName + "\n");
-                writer.write("详情:\n" + details);
-            }
-
-            response.put("success", true);
-            response.put("message", "资源详情已生成并提交！");
-        } catch (Exception e) {
-            response.put("success", false);
-            response.put("message", "发生错误：" + e.getMessage());
-        }
-
-        return ResponseEntity.ok(response);
-    }
+//    @PostMapping
+//    public ResponseEntity<Map<String, Object>> submitResourceDetail(@RequestBody Map<String, String> requestData) {
+//        Map<String, Object> response = new HashMap<>();
+//        try {
+//            String resourceTitle = requestData.get("resourceTitle");
+//            String tagName = requestData.get("tagName");
+//            String languageName = requestData.get("languageName");
+//            String details = requestData.get("details");
+//
+//            // 定义文件路径和文件名
+//            String filePath = "resources/" + resourceTitle + ".txt";
+//            File file = new File(filePath);
+//
+//            // 确保目录存在
+//            file.getParentFile().mkdirs();
+//
+//            // 写入文件
+//            try (FileWriter writer = new FileWriter(file)) {
+//                writer.write("资源标题: " + resourceTitle + "\n");
+//                writer.write("标签: " + tagName + "\n");
+//                writer.write("语言: " + languageName + "\n");
+//                writer.write("详情:\n" + details);
+//            }
+//
+//            response.put("success", true);
+//            response.put("message", "资源详情已生成并提交！");
+//        } catch (Exception e) {
+//            response.put("success", false);
+//            response.put("message", "发生错误：" + e.getMessage());
+//        }
+//
+//        return ResponseEntity.ok(response);
+//    }
 
 
 

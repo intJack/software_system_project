@@ -88,7 +88,7 @@
 
         <label for="description">内容：</label>
 
-        <textarea id="words" name="resourceWords" rows="20" required></textarea>
+        <textarea id="resourceWords" name="resourceWords" rows="20" required></textarea>
 
         <button type="submit">发布资源</button>
     </form>
@@ -106,6 +106,7 @@
             const tagName = document.getElementById('tag').value.trim();
             const languageName = document.getElementById('language').value.trim();
             const resourceDescription = document.getElementById('description').value.trim();
+            const resourceWords = document.getElementById('resourceWords').value.trim();
 
             // 检查必填项
             if (!resourceTitle || !tagName || !languageName || !resourceDescription) {
@@ -122,7 +123,8 @@
                         resourceTitle,
                         tagName,
                         languageName,
-                        resourceDescription
+                        resourceDescription,
+                        resourceWords
                     })
                 });
 
