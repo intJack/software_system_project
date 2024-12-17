@@ -1,21 +1,17 @@
 package edu.just.resource_management_system;
 
 import edu.just.resource_management_system.mapper.*;
-import edu.just.resource_management_system.pojo.Admin;
 import edu.just.resource_management_system.pojo.User;
 import edu.just.resource_management_system.service.AdminService;
 import edu.just.resource_management_system.service.ResourceService;
 import edu.just.resource_management_system.service.TagService;
 import edu.just.resource_management_system.service.UserService;
-import edu.just.resource_management_system.util.MD5Util;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 
 @MapperScan(basePackages = "edu.just.resource_management_system.mapper")
 @EnableTransactionManagement
