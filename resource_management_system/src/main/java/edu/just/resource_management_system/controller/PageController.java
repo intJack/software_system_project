@@ -43,10 +43,10 @@ public class PageController {
         return "manager_selfinfo";
     }
 
-    @GetMapping("/forum")
-    public String forumHome() {
-        return "forum"; // 返回论坛首页模板
-    }
+//    @GetMapping("/forum")
+//    public String forumHome() {
+//        return "forum"; // 返回论坛首页模板
+//    }
 
     @GetMapping("/aboutus")
     public String aboutus() {

@@ -64,7 +64,7 @@ CREATE TABLE resource(
                          updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,  -- 更新时间
                          FOREIGN KEY (tag_language_id) REFERENCES tag_language(id) ON DELETE CASCADE
 );
-#
+# #
 #
 # CREATE TABLE resource_description(
 #                                      id INT AUTO_INCREMENT PRIMARY KEY,
@@ -98,28 +98,29 @@ CREATE TABLE resource(
 #                            review_by BIGINT #这个是审核管理员的id
 # );
 #
--- 插入 tag 表的数据
-INSERT INTO tag (tag_name, description) VALUES
-                                            ('java', 'Java 相关的标签'),
-                                            ('python', 'Python 相关的标签'),
-                                            ('c++', 'C++ 相关的标签');
-
--- 插入 language 表的数据
-INSERT INTO language (language_name, description) VALUES
-                                                      ('java', 'Java 编程语言'),
-                                                      ('python', 'Python 编程语言'),
-                                                      ('c++', 'C++ 编程语言');
-
--- 插入 tag_language 表的数据
-INSERT INTO tag_language (tag_name, language_name)
-VALUES
-    ('java', 'java'),
-    ('python', 'python'),
-    ('c++', 'c++');
-
--- 插入 resource 表的数据
-INSERT INTO resource (tag_language_id, resource_title, resource_url, resource_description) VALUES
-                                                                                               (1, 'Java 入门教程', 'https://example.com/java-tutorial', '适合初学者的 Java 教程'),
-alter table resources_temp
-    add resource_url varchar(50) not null;                                                                                    (2, 'Python 数据科学', 'https://example.com/python-data-science', 'Python 数据科学课程资源'),
-                                                                                               (3, 'C++ 高级编程', 'https://example.com/cpp-advanced', '深入探讨 C++ 编程的高级特性');
+# -- 插入 tag 表的数据
+# INSERT INTO tag (tag_name, description) VALUES
+#                                             ('java', 'Java 相关的标签'),
+#                                             ('python', 'Python 相关的标签'),
+#                                             ('c++', 'C++ 相关的标签');
+#
+# -- 插入 language 表的数据
+# INSERT INTO language (language_name, description) VALUES
+#                                                       ('java', 'Java 编程语言'),
+#                                                       ('python', 'Python 编程语言'),
+#                                                       ('c++', 'C++ 编程语言');
+#
+# -- 插入 tag_language 表的数据
+# INSERT INTO tag_language (tag_name, language_name)
+# VALUES
+#     ('java', 'java'),
+#     ('python', 'python'),
+#     ('c++', 'c++');
+#
+# -- 插入 resource 表的数据
+# INSERT INTO resource (tag_language_id, resource_title, resource_url, resource_description) VALUES
+#                                                                                                (1, 'Java 入门教程', 'https://example.com/java-tutorial', '适合初学者的 Java 教程'),
+#                                                                                                (2, 'Python 数据科学', 'https://example.com/python-data-science', 'Python 数据科学课程资源'),
+#                                                                                                (3, 'C++ 高级编程', 'https://example.com/cpp-advanced', '深入探讨 C++ 编程的高级特性');
+# alter table resources_temp
+#     add resource_url varchar(50) not null;

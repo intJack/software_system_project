@@ -103,12 +103,14 @@ public class ResourceServiceImpl implements ResourceService {
 
     /**
      * 查询最新的前 10 条资源
-     * @param ids 可选的标签或语言 ID 列表
      * @return 资源列表
      */
-    public List<Resource> findTop10ByOrderByCreateAtDesc(List<Integer> ids) {
-        return resourceMapper.selectTop10Resources(ids);
+    public List<Resource> findTop10ByOrderByCreateAtDesc() {
+        // 调试查询
+
+        return resourceMapper.selectTop10Resources();
     }
+
 
 
     public int getTagLanguageId(String tagName, String languageName) {

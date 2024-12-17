@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.net.URI;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -62,6 +63,14 @@ public class ResourceController {
         return "redirect:/resource_check"; // 这里是重新加载 resource_check 页面
     }
 
+    // 获取最新的10个资源
+    @GetMapping("/forum")
+    public String showForumPage(Model model) {
+        // 获取最新的 10 个资源
+        List<Resource> resources = resourceService.findTop10ByOrderByCreateAtDesc();
+        model.addAttribute("resources", resources);  // 将资源传递给前端
+        return "forum";  // 返回到 forum 页面
+    }
 
 //    @PostMapping
 //    public ResponseEntity<Map<String, Object>> submitResourceDetail(@RequestBody Map<String, String> requestData) {

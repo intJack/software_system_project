@@ -130,5 +130,8 @@ class springbootApplicationTests {
         tagService.findIdByTagAndLanguage("C++","Chinese")
                 .stream().forEach(System.out::println);
     }
-
+    @Test
+    void test03(){
+        resourceMapper.selectTop10Resources().stream().forEach(System.out::println);
+    }
 }

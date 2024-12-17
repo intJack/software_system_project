@@ -1,7 +1,11 @@
 package edu.just.resource_management_system.pojo;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.Date;
 //import javax.persistence.Entity;
 //import javax.persistence.Id;
 
@@ -17,8 +21,13 @@ public class Resource {
     private String resourceDescription;
     private String tagName;
     private String languageName;
-    @Setter
-    @Getter
     private Long tagLanguageId;
+    private Date createdAt;
+    public Long getTagLanguageId() {
+        return tagLanguageId;
+    }
 
+    public void setTagLanguageId(Long tagLanguageId) {
+        this.tagLanguageId = tagLanguageId;
+    }
 }

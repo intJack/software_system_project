@@ -102,7 +102,7 @@ public class UserController {
      */
     @GetMapping("/latest")
     public String latestPage(@RequestParam(value = "ids", required = false) List<Integer> ids, ModelMap modelMap) {
-        List<Resource> latestResources = resourceService.findTop10ByOrderByCreateAtDesc(ids);
+        List<Resource> latestResources = resourceService.findTop10ByOrderByCreateAtDesc();
         modelMap.addAttribute("latestResources", latestResources);
         return "latest";
     }
