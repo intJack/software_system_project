@@ -57,8 +57,8 @@
     </select>
     <!-- 插入资源 -->
     <insert id="insertResource2" parameterType="edu.just.resource_management_system.pojo.Resource">
-        INSERT INTO resource (tag_language_id, resource_title, resource_url, resource_description)
-        VALUES (#{tagLanguageId}, #{resourceTitle}, #{resourceUrl}, #{resourceDescription});
+        INSERT INTO resources_temp ( resource_title,tag_name,language_name,resource_url,resource_description)
+        VALUES (#{resourceTitle},#{tagName},#{languageName},#{resourceUrl}, #{resourceDescription});
     </insert>
 
     <select id="findTagLanguageId" resultType="int">

@@ -8,6 +8,19 @@ public class ResourceRequest {
     private String tagName;
     private String languageName;
     private String resourceDescription;
+    private String resourceWords;
+
+
+
+
+
+    public String getResourceWords() {
+        return resourceWords;
+    }
+
+    public void setResourceWords(String resourceWords) {
+        this.resourceWords = resourceWords;
+    }
 
     // Getters and Setters
 
