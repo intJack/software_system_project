@@ -8,6 +8,7 @@ import edu.just.resource_management_system.util.MD5Util;
 import edu.just.resource_management_system.util.TokenUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -43,16 +44,16 @@ public class AdminController {
             //往session域存userName 和 id
             request.getSession().setAttribute("adminName", admin.getAdminName());
             request.getSession().setAttribute("id", admin.getId());
-            String token = TokenUtil.token(admin.getAdminName(),admin.getAdminPassword());
+            String token = TokenUtil.token(admin.getAdminName(), admin.getAdminPassword());
             // 设置cookie
             Cookie tokenCookie = new Cookie("token", token);
             tokenCookie.setHttpOnly(true);
             tokenCookie.setPath("/");
             //加入响应体当中
             HashMap<String, Object> response = new HashMap<>();
-            response.put("token",token);
-            response.put("Id",admin.getId());
-            response.put("userName",admin.getAdminName());
+            response.put("token", token);
+            response.put("Id", admin.getId());
+            response.put("userName", admin.getAdminName());
             return ResponseEntity.ok(response);
         } else {
             Map<String, Object> errorResponse = new HashMap<>();
@@ -60,6 +61,7 @@ public class AdminController {
             return ResponseEntity.status(401).body(errorResponse);
         }
     }
+
     /**
      * 管理员进入管理员后台管理界面
      * @return
@@ -67,12 +69,12 @@ public class AdminController {
     @GetMapping("/admin")
     public String AdminLoginPage(Model model){
         List<User> allUsers = userService.findAll();
-        model.addAttribute("allUsers",allUsers);
+        model.addAttribute("allUsers", allUsers);
         return "admin_management";
     }
 
     /**
-     *
+     * 删除用户
      * @param id
      * @return
      */
@@ -82,6 +84,25 @@ public class AdminController {
         return "redirect:/admin";
     }
 
+    /**
+     * 退出登录
+     * @param request
+     * @param response
+     * @return
+     */
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        // 使会话失效，清除session中的用户信息
+        request.getSession().invalidate();
 
+        // 删除Token cookie
+        Cookie tokenCookie = new Cookie("token", null);
+        tokenCookie.setHttpOnly(true);
+        tokenCookie.setPath("/");
+        tokenCookie.setMaxAge(0);  // 设置cookie过期
+        response.addCookie(tokenCookie);
 
+        // 重定向到首页
+        return "redirect:/home";
+    }
 }

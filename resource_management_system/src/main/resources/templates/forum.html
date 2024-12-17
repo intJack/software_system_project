@@ -158,6 +158,7 @@
         <li th:if="${session.userName == null}"><a th:href="@{/managerlogin}">管理员登录</a></li>
         <li th:if="${session.userName == null}"><a th:href="@{/register}">注册</a></li>
         <li th:if="${session.userName != null}"><a th:text="${session.userName}" th:href="@{/selfinfo}"></a></li>
+        <li th:if="${session.userName != null}"><a th:href="@{/logout}">注销</a></li>
       </ul>
     </nav>
   </div>

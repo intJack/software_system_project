@@ -66,6 +66,7 @@
                 <li th:if="${session.userName == null}"><a th:href="@{/managerlogin}">管理员登录</a></li>
                 <li th:if="${session.userName == null}"><a th:href="@{/register}">注册</a></li>
                 <li th:if="${session.userName != null}"><a th:text="${session.userName}" th:href="@{/selfinfo}"></a></li>
+                <li th:if="${session.userName != null}"><a th:href="@{/logout}">注销</a></li>
             </ul>
         </nav>
     </div>
@@ -82,18 +83,27 @@
             </div>
 
             <article class="post">
-                <h2><a th:href="@{/search}">资源查询</a></h2>
+                <h2>
+                    <img src="/svg/Search.svg" alt="图标" style="width: 32px; height: 32px; margin-right: 8px; vertical-align: middle;">
+                    <a th:href="@{/search}">资源查询</a>
+                </h2>
                 <a class="read-more" th:href="@{/search}">进行查询&gt;</a>
             </article>
 
             <article class="post">
-                <h2><a th:href="@{/search}">语言查询</a></h2>
+                <h2>
+                    <img src="/svg/Language.svg" alt="图标" style="width: 25px; height: 25px; margin-right: 8px; vertical-align: middle;">
+                    <a th:href="@{/search}">语言查询</a>
+                </h2>
                 <a class="read-more" th:href="@{/search}">进行查询&gt;</a>
             </article>
 
 
             <article class="post">
-                <h2><a th:href="@{/forum}">最新帖子</a></h2>
+                <h2>
+                    <img src="/svg/News.svg" alt="图标" style="width: 28px; height: 28px; margin-right: 8px; vertical-align: middle;">
+                    <a th:href="@{/forum}">最新帖子</a>
+                </h2>
                 <a class="read-more" th:href="@{/forum}">查看详情&gt;</a>
             </article>
         </div>

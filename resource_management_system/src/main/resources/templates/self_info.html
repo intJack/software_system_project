@@ -151,7 +151,8 @@
 <!--                <li><a th:href="@{/resource_check}" >审核资源</a></li>-->
                 <li th:if="${session.userName == null}"><a th:href="@{/login}">登录</a></li>
                 <li th:if="${session.userName == null}"><a th:href="@{/register}">注册</a></li>
-                <li th:if="${session.userName != null}"><a th:text="${session.userName}" href="#"></a></li>
+                <li th:if="${session.userName != null}"><a th:text="${session.userName}" th:href="@{/selfinfo}"></a></li>
+                <li th:if="${session.userName != null}"><a th:href="@{/logout}">注销</a></li>
             </ul>
         </nav>
     </div>
