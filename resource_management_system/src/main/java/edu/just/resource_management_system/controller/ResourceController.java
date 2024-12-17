@@ -1,5 +1,6 @@
 package edu.just.resource_management_system.controller;
 
+import edu.just.resource_management_system.pojo.Resource;
 import edu.just.resource_management_system.service.ResourceService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,13 +50,15 @@ public class ResourceController {
 //    }
 
 
-    @GetMapping("/approve-resource/{id}/{tagName}/{languageName}/{resourceTitle}")
-    public String approveResource(@PathVariable("id") Long id,@PathVariable("tagName")String tagName,
-                                                  @PathVariable("languageName")String languageName,@PathVariable("resourceTitle")String resourceTitle,
-                                                              HttpServletRequest request) {
+    @GetMapping("/approve-resource/{id}")
+    public String approveResource(@PathVariable("id") Long id,
+                                  HttpServletRequest request) {
         Long reviewBy = (Long) request.getSession().getAttribute("id");
-
-        resourceService.approveResource(id, reviewBy,tagName,languageName,resourceTitle);
+        Resource resource = resourceService.findTempResourceById(id).get(0);
+//        System.out.println(resourceService.findTempResourceById(id));
+        resourceService.approveResource(id, reviewBy,resource.getTagName(),
+                resource.getLanguageName(),resource.getResourceTitle(),
+                resource.getResourceUrl(),resource.getResourceDescription());
         return "redirect:/resource_check"; // 这里是重新加载 resource_check 页面
     }
 

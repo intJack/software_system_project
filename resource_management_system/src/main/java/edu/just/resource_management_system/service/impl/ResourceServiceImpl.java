@@ -42,7 +42,8 @@ public class ResourceServiceImpl implements ResourceService {
      */
 
     @Override
-    public void approveResource(Long id, Long reviewBy,String tagName,String languageName,String resourceTitle) {
+    public void approveResource(Long id, Long reviewBy,String tagName,String languageName,String resourceTitle,
+                                String resourceUrl,String resourceDescription) {
         resourceMapper.updateResourceStatus(id, "已通过", reviewBy);
         /**
          * 由于数据库的复杂性，插入资源相当麻烦需要进行一系列操作
@@ -68,8 +69,8 @@ public class ResourceServiceImpl implements ResourceService {
         }
         //得到tag_resource_id
         Long id1 = resourceMapper.findIdByTagNameAndLanguageName(tagName, languageName);
-        //插入到resource
-        resourceMapper.insertResource(id1,resourceTitle);
+        //插入到resource 包含language_id resourceTitle resourceUrl resourceDescription
+        resourceMapper.insertResource(id1,resourceTitle,resourceUrl,resourceDescription);
     }
 
     @Override
@@ -112,6 +113,11 @@ public class ResourceServiceImpl implements ResourceService {
 
     public int getTagLanguageId(String tagName, String languageName) {
         return resourceMapper.findTagLanguageId(tagName, languageName);
+    }
+
+    @Override
+    public List<Resource> findTempResourceById(Long id) {
+        return resourceMapper.selectResourceById(id);
     }
 
     public void saveResource(Resource resource) {

@@ -41,6 +41,5 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void approveResource(Long id) {
-
     }
 }

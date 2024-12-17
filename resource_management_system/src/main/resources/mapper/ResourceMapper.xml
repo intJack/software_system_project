@@ -7,7 +7,8 @@
         INSERT INTO tag_language(tag_name,language_name)VALUES (#{tagName},#{languageName});
     </insert>
     <insert id="insertResource">
-        INSERT INTO resource(tag_language_id,resource_title)VALUES (#{tagLanguageId},#{resourceTitle});
+        INSERT INTO resource(tag_language_id,resource_title,resource_url,resource_description)
+        VALUES (#{tagLanguageId},#{resourceTitle},#{resourceUrl},#{resourceDescription});
     </insert>
     <update id="UpdateResourceByTagLanguageId">
         UPDATE resource SET tag_language_id =#{tagLanguageId}  WHERE id = #{id}
@@ -46,7 +47,7 @@
         </where>
     </select>
     <select id="selectAllResources" resultType="edu.just.resource_management_system.pojo.Resource">
-        SELECT id,resource_title,tag_name,language_name,resource_description
+        SELECT id,resource_title,tag_name,language_name,resource_description,resource_url
         FROM resources_temp
         WHERE  status = '待审核'
         ORDER BY upload_time;
@@ -66,6 +67,11 @@
         FROM tag_language
         WHERE tag_name = #{tagName} AND language_name = #{languageName}
             LIMIT 1
+    </select>
+    <select id="selectResourceById" resultType="edu.just.resource_management_system.pojo.Resource">
+        SELECT resource_title,tag_name,language_name,resource_description,resource_url
+        from resources_temp
+        WHERE id = #{id};
     </select>
 
 </mapper>

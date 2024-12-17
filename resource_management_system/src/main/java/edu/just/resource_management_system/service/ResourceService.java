@@ -13,7 +13,8 @@ public interface ResourceService {
                                                 String keyword);
 
 //    void saveTempResource(Resource resource);
-     void approveResource(Long id, Long reviewBy,String tagName,String languageName,String resourceTitle);
+     void approveResource(Long id, Long reviewBy,String tagName,String languageName,String resourceTitle,
+                          String resourceUrl,String resourceDescription);
 
     void rejectResource(Long id, Long reviewBy);
 
@@ -22,6 +23,10 @@ public interface ResourceService {
     Long findIdByTagNameAndLanguageName(String tagName,String languageName);
 
     List<Resource> findTop10ByOrderByCreateAtDesc(List<Integer> ids);
+
     void saveResource(Resource resource);
+
     int getTagLanguageId(String tagName, String languageName);
+
+    List<Resource> findTempResourceById(Long id);
 }

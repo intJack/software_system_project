@@ -149,6 +149,7 @@
       <th>资源描述</th>
       <th>语言</th>
       <th>标签</th>
+      <th>资源URL</th>
       <th>操作</th>
     </tr>
     </thead>
@@ -158,9 +159,9 @@
       <td th:text="${resource.resourceDescription}"></td>
       <td th:text="${resource.languageName}"></td>
       <td th:text="${resource.tagName}"></td>
+      <td th:text="${resource.resourceUrl}"></td>
       <td>
-        <a th:href="@{'/approve-resource/' + ${resource.id}+'/'+${resource.tagName}+'/'+${resource.languageName}+'/'+${resource.resourceTitle}}"
-           onclick="rejectResource(${resource.id})">通过</a >
+        <a th:href="@{'/approve-resource/' + ${resource.id}}" onclick="rejectResource(${resource.id})">通过</a >
         <a th:href="@{'/reject-resource/' + ${resource.id}}" onclick="rejectResource(${resource.id})">拒绝</a >
 
 

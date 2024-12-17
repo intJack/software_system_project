@@ -1,10 +1,7 @@
 package edu.just.resource_management_system.mapper;
 
 import edu.just.resource_management_system.pojo.Resource;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -43,19 +40,13 @@ public interface ResourceMapper {
     void UpdateResourceByTagLanguageId(Long tagLanguageId,Long id);
 
     void insertResource(@Param("tagLanguageId")Long tagLanguageId,
-                        @Param("resourceTitle")String resourceTitle);
-//     插入待审核资源
-//    @Insert("INSERT INTO resources_temp(user_id, file_path, upload_time, status, review_time, review_by) " +
-//            "VALUES(#{userId}, #{filePath}, NOW(), '待审核', NULL, NULL)")
-//    @Options(useGeneratedKeys = true, keyProperty = "id")
-//    void insertTempResource(Resource resource);
-//
-//    @Insert("INSERT INTO resource (id, resource_title, resource_url, resource_description)" +
-//            " VALUES (#{id}, #{resourceTitle}, #{resourceUrl}, #{resourceDescription})")
-//    @Options(useGeneratedKeys = true, keyProperty = "id")
-//    void insertResource(Resource resource);
+                        @Param("resourceTitle")String resourceTitle,
+                        @Param("resourceUrl")String resourceUrl,
+                        @Param("resourceDescription")String resourceDescription);
 
     void insertResource2(Resource resource);
 
     Integer findTagLanguageId(@Param("tagName") String tagName, @Param("languageName") String languageName);
+
+    List<Resource> selectResourceById(Long id);
 }
