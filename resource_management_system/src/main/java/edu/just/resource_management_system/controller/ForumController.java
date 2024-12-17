@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/forum") // 设置论坛相关的路径前缀
+@RequestMapping("/forum")
 public class ForumController {
     // 帖子详情页面
     @GetMapping("/post/{id}")

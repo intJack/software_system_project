@@ -157,7 +157,6 @@ public class UserController {
         //跳转到查询结果页
         return "";
     }
-
     /**
      * 跳转之前存储标签信息和语言信息
      * 跳转到发布资源页面
@@ -190,8 +189,5 @@ public class UserController {
             return ResponseEntity.status(401).body(response);
         }
     }
-
-
-
 
 }

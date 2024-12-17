@@ -120,5 +120,6 @@ VALUES
 -- 插入 resource 表的数据
 INSERT INTO resource (tag_language_id, resource_title, resource_url, resource_description) VALUES
                                                                                                (1, 'Java 入门教程', 'https://example.com/java-tutorial', '适合初学者的 Java 教程'),
-                                                                                               (2, 'Python 数据科学', 'https://example.com/python-data-science', 'Python 数据科学课程资源'),
+alter table resources_temp
+    add resource_url varchar(50) not null;                                                                                    (2, 'Python 数据科学', 'https://example.com/python-data-science', 'Python 数据科学课程资源'),
                                                                                                (3, 'C++ 高级编程', 'https://example.com/cpp-advanced', '深入探讨 C++ 编程的高级特性');
