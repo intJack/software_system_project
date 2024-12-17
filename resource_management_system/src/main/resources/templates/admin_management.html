@@ -98,6 +98,10 @@
     nav ul li a:active {
       color: #c9c9c9;
     }
+
+    .navbar .tit a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -108,7 +112,7 @@
     <div class="logo">
       <a href="@{/}">资源管理系统</a>
     </div>
-    <nav>
+    <nav class="tit">
       <ul>
         <li><a th:href="@{/}">首页</a></li>
         <li><a th:href="@{/forum}">论坛</a></li>
