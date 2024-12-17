@@ -123,8 +123,8 @@
     <nav>
       <ul>
         <li><a th:href="@{/}">首页</a></li>
-        <li><a href="#">论坛</a></li>
-        <li><a href="#">关于</a></li>
+        <li><a th:href="@{/forum}">论坛</a></li>
+        <li><a th:href="@{/aboutus}">关于</a></li>
 <!--        <li th:if="${session.userName == null}"><a th:href="@{/managerlogin}">管理员登录</a></li>-->
 <!--        <li th:if="${session.adminName != null}"><a th:href="@{/resource_check}" >审核资源</a></li>-->
         <li th:if="${session.userName != null}"><a th:text="${session.userName}" href="#"></a></li>
