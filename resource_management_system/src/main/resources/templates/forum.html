@@ -152,8 +152,8 @@
     <nav class="tit">
       <ul>
         <li><a th:href="@{/}">首页</a></li>
-        <a th:href="@{/forum}">论坛</a></li>
-        <li><a href="#">关于</a></li>
+        <li><a th:href="@{/forum}">论坛</a></li>
+        <li><a th:href="@{/aboutus}">关于</a></li>
         <li th:if="${session.userName == null}"><a th:href="@{/login}">用户登录</a></li>
         <li th:if="${session.userName == null}"><a th:href="@{/managerlogin}">管理员登录</a></li>
         <li th:if="${session.userName == null}"><a th:href="@{/register}">注册</a></li>
@@ -198,13 +198,13 @@
 
   <!-- Right Sidebar -->
   <div class="sidebar">
-    <h4>热门话题</h4>
+    <h4>必学内容</h4>
     <ul>
-      <li><a th:href="@{/topic/spring-boot}">Spring Boot 入门教程</a></li>
-      <li><a th:href="@{/topic/java-design-patterns}">Java 设计模式</a></li>
-      <li><a th:href="@{/topic/react-vue-comparison}">React 与 Vue 比较</a></li>
-      <li><a th:href="@{/topic/front-end-best-practices}">前端开发最佳实践</a></li>
-      <li><a th:href="@{/topic/algorithms}">算法与数据结构</a></li>
+      <li><a href="/pdf/Spring.pdf" download>Spring Boot 入门教程</a></li>
+      <li><a href="@{/topic/java-design-patterns}">Java 设计模式</a></li>
+      <li><a href="@{/topic/react-vue-comparison}">React 与 Vue 比较</a></li>
+      <li><a href="@{/topic/front-end-best-practices}">前端开发最佳实践</a></li>
+      <li><a href="@{/topic/algorithms}">算法与数据结构</a></li>
     </ul>
   </div>
 </main>
