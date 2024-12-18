@@ -127,20 +127,10 @@
 
     <div class="button-group">
         <!-- 下载资源按钮 -->
-        <a th:href="@{/forum}" class="btn btn-download" th:if="${session.userName != null}"onclick="showAlertAndRedirect()" >下载资源</a>
+        <a th:href="@{/forum}" class="btn btn-download">返回</a>
         <!-- 首页按钮 -->
         <a href="/home" class="btn btn-home">首页</a>
     </div>
 </div>
-
-<script>
-    function showAlertAndRedirect() {
-        // 弹出提示框
-        alert('请返回论坛下载！');
-
-        // 跳转到指定页面（此处为 /forum）
-        window.location.href = '/forum';
-    }
-</script>
 </body>
 </html>
