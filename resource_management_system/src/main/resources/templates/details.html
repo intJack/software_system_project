@@ -109,6 +109,12 @@
             word-wrap: break-word; /* 长单词折行 */
         }
     </style>
+    <script>
+        // 返回上一级页面的函数
+        function goBack() {
+            window.history.back();  // 返回上一级页面
+        }
+    </script>
 </head>
 <body>
 
@@ -127,7 +133,7 @@
 
     <div class="button-group">
         <!-- 下载资源按钮 -->
-        <a th:href="@{/forum}" class="btn btn-download">返回</a>
+        <a href="javascript:void(0);" class="btn btn-download btn-primary" onclick="goBack()">返回</a>
         <!-- 首页按钮 -->
         <a href="/home" class="btn btn-home">首页</a>
     </div>
