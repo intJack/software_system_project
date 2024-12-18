@@ -136,7 +136,7 @@
     function checkLogin() {
         if (!localStorage.getItem("token")) {
             alert("请先登录！");
-            window.location.href = "index.html";
+            window.location.href = '/login';
             return false;
         }
         return true;
