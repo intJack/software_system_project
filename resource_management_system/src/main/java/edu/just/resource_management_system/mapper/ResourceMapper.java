@@ -49,4 +49,8 @@ public interface ResourceMapper {
     Integer findTagLanguageId(@Param("tagName") String tagName, @Param("languageName") String languageName);
 
     List<Resource> selectResourceById(Long id);
+
+    Resource selectResourceById2(int id);
+
+
 }

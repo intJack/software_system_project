@@ -29,4 +29,5 @@ public interface ResourceService {
     int getTagLanguageId(String tagName, String languageName);
 
     List<Resource> findTempResourceById(Long id);
+    Resource findResourceById2(int id);
 }

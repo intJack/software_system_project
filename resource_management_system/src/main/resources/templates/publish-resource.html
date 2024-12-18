@@ -101,7 +101,6 @@
 
         form.addEventListener('submit', async function (event) {
             event.preventDefault(); // 阻止默认提交
-
             // 获取表单内容
             const resourceTitle = document.getElementById('resourceTitle').value.trim();
             const tagName = document.getElementById('tag').value.trim();
@@ -114,7 +113,6 @@
                 alert('请填写所有必填字段！');
                 return;
             }
-
             // 发送请求
             try {
                 const response = await fetch('/resources/submit1', {

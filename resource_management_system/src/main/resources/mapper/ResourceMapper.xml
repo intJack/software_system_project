@@ -69,5 +69,10 @@
         WHERE id = #{id};
     </select>
 
+    <select id="selectResourceById2" resultType="edu.just.resource_management_system.pojo.Resource">
+        SELECT resource_title,resource_description,resource_url
+        from resource
+        WHERE id = #{id};
+    </select>
 </mapper>
 

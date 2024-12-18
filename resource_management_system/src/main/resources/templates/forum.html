@@ -6,6 +6,70 @@
   <link rel='icon' href='/svg/Source.ico'>
   <title>论坛首页</title>
   <style>
+    /* 资源列表的整体样式 */
+    .resource-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      max-width: 800px; /* 限制最大宽度 */
+      margin: 20px auto; /* 居中 */
+    }
+
+    /* 每一条资源项的样式 */
+    .resource-item {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px; /* 圆角 */
+      margin: 15px 0;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    /* 鼠标悬停时的效果 */
+    .resource-item:hover {
+      transform: translateY(-5px); /* 上浮效果 */
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* 资源标题的样式 */
+    .resource-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    /* 资源描述的样式 */
+    .resource-description {
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    /* 查看详情链接的样式 */
+    .resource-details-link {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 1rem;
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* 鼠标悬停时，改变链接颜色 */
+    .resource-details-link:hover {
+      text-decoration: underline;
+      color: #0056b3;
+    }
+
+
+    /* 可选：为每条资源项添加间隔 */
+    .resource-item + .resource-item {
+      margin-top: 20px;
+    }
+
+
     /* Reset some default styles */
     * {
       margin: 0;
@@ -169,32 +233,25 @@
   <div class="posts">
     <h2>最新论坛帖子</h2>
 
-    <!-- 输出资源数量，先检查 resources 是否存在 -->
-    <p th:if="${resources != null}" th:text="'Total resources: ' + ${resources.size()}"></p>
-    <p th:if="${resources == null}" th:text="'No resources available'"></p>
+<!--    &lt;!&ndash; 输出资源数量，先检查 resources 是否存在 &ndash;&gt;-->
+<!--    <p th:if="${resources != null}" th:text="'Total resources: ' + ${resources.size()}"></p>-->
+<!--    <p th:if="${resources == null}" th:text="'No resources available'"></p>-->
 
     <ul class="resource-list">
       <th:block th:each="resource : ${resources}">
-        <li>
-          <!-- 直接显示资源标题 -->
-          <p th:text="${resource.resourceTitle}"></p>
-          <!-- 显示资源描述 -->
-          <p th:text="${resource.resourceDescription}"></p>
+        <li class="resource-item">
+          <div class="resource-content">
+            <h3 class="resource-title" th:text="${resource.resourceTitle}"></h3>
+            <p class="resource-description" th:text="${resource.resourceDescription}"></p>
+            <!-- 资源详情链接 -->
+            <a class="resource-details-link" th:href="@{resources/details/{id}(id=${resource.id})}" th:text="'查看详情'"></a>
+          </div>
         </li>
       </th:block>
     </ul>
 
 
   </div>
-
-
-
-  <!-- 可以添加一个分页按钮，或者根据用户需要调整 -->
-  <button id="loadMore" onclick="loadResources()">加载更多</button>
-
-
-
-
 
   <!-- Right Sidebar -->
   <div class="sidebar">

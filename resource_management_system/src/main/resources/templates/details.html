@@ -98,20 +98,32 @@
         .btn-home:active {
             background-color: #004085;
         }
+        /* 内容显示区域 */
+        .resource-content {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            white-space: pre-wrap; /* 保持换行符 */
+            word-wrap: break-word; /* 长单词折行 */
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <h2 class="resource-title">${resource.title}</h2>
+    <h2 class="resource-title"th:text="${resourceTitle}"></h2>
     <div class="resource-info">
-        <p><strong>描述：</strong>${resource.description}</p>
-        <p><strong>开发语言：</strong>${resource.language}</p>
-        <p><strong>标签：</strong>
-            <th:each var="tag" items="${resource.tags}">
-                <span class="tag" th:text="${tag.name}"></span>
-            </th:each>
-        </p>
+        <p th:text="${resourceDescription}"></p>
+        <p th:text="${resourceTagName}"></p>
+<!--        <p><strong>标签：</strong>-->
+<!--            <th:each var="tag" items="${resource.tags}">-->
+<!--                <span class="tag" th:text="${tag.tagName}"></span>-->
+<!--            </th:each>-->
+<!--        </p>-->
     </div>
+    <div class="resource-content"  th:text="${resourceContent}">资源内容显示区域</div>
+
     <div class="button-group">
         <!-- 下载资源按钮 -->
         <a href="http://localhost:63342/resources/download/${resource.id}" onclick="return checkLogin()" class="btn btn-download">下载资源</a>

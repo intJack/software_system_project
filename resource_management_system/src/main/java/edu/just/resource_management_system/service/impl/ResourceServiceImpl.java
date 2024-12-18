@@ -125,5 +125,7 @@ public class ResourceServiceImpl implements ResourceService {
     public void saveResource(Resource resource) {
         resourceMapper.insertResource2(resource);
     }
-
+    public  Resource findResourceById2(int id) {
+        return resourceMapper.selectResourceById2(id);
+    }
 }
