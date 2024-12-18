@@ -111,6 +111,7 @@
     </style>
 </head>
 <body>
+
 <div class="container">
     <h2 class="resource-title"th:text="${resourceTitle}"></h2>
     <div class="resource-info">
@@ -126,20 +127,19 @@
 
     <div class="button-group">
         <!-- 下载资源按钮 -->
-        <a href="http://localhost:63342/resources/download/${resource.id}" onclick="return checkLogin()" class="btn btn-download">下载资源</a>
+        <a th:href="@{/forum}" class="btn btn-download" th:if="${session.userName != null}"onclick="showAlertAndRedirect()" >下载资源</a>
         <!-- 首页按钮 -->
-        <a href="home.html" class="btn btn-home">首页</a>
+        <a href="/home" class="btn btn-home">首页</a>
     </div>
 </div>
 
 <script>
-    function checkLogin() {
-        if (!localStorage.getItem("token")) {
-            alert("请先登录！");
-            window.location.href = '/login';
-            return false;
-        }
-        return true;
+    function showAlertAndRedirect() {
+        // 弹出提示框
+        alert('请返回论坛下载！');
+
+        // 跳转到指定页面（此处为 /forum）
+        window.location.href = '/forum';
     }
 </script>
 </body>

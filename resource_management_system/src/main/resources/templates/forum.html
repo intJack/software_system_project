@@ -245,6 +245,8 @@
             <p class="resource-description" th:text="${resource.resourceDescription}"></p>
             <!-- 资源详情链接 -->
             <a class="resource-details-link" th:href="@{resources/details/{id}(id=${resource.id})}" th:text="'查看详情'"></a>
+            <a class="resource-details-link" th:if="${session.userName != null}" th:href="@{resources/download/{id}(id=${resource.id})}">下载资源</a>
+
           </div>
         </li>
       </th:block>
