@@ -183,11 +183,11 @@
     $.ajax({
       url: '/reject-resource/' + resourceId,  // 发送请求到后端
       type: 'GET',
-      success: function (response) {
+      success: function () {
         // 如果操作成功，刷新页面
         window.location.reload();
       },
-      error: function (xhr, status, error) {
+      error: function () {
         alert("操作失败，请稍后重试！");
       }
     });
