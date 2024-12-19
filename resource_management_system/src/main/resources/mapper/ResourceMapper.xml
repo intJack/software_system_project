@@ -23,10 +23,6 @@
         ORDER BY r.created_at DESC
             LIMIT 10
     </select>
-
-
-
-
     <select id="selectResourcesByIdsAndKeyword" resultType="edu.just.resource_management_system.pojo.Resource">
         SELECT r.id,r.resource_title,r.resource_url FROM resource as r
         <where>

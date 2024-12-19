@@ -41,9 +41,9 @@ public class UserController {
     public ResponseEntity<Map<String,Object>> login(@RequestParam("userName") String userName,
                                                     @RequestParam("userPassword") String password,
                                                     HttpServletRequest request) {
-        // 加密密码
+
         String encryptedPassword = MD5Util.encryptToMD5(password);
-        // 调用服务进行登录验证
+
         User user = userService.login(userName, encryptedPassword);
 
         if (user != null) {

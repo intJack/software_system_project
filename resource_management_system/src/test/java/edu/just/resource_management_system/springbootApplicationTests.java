@@ -19,8 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 class springbootApplicationTests {
 
 
-    @Autowired
-    private UserService userService;
+
 
     @Autowired
     private UserMapper userMapper;
